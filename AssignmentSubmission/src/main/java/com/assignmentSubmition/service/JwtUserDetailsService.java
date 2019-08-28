@@ -1,26 +1,25 @@
 package com.assignmentSubmition.service;
 
+import java.util.ArrayList;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Locale;
-
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        if ("admin".equals(login)) {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        if ("admin".equals(username)) {
             // userName= admin password= admin
-            return new User("admin", "$2a$10$tSLo5oDwwLpvKgOGG/cHE.WdupXw55.0UXFAJ9zxQf53XlD2gn4Jm",
+            return new User("admin", "$2a$10$hW9X0uF.wePffEJU2EVqbePlsChUFZwIzdBAzDphKxx2G3YmCOx.W",
                     new ArrayList<>());
         }else
-           throw new UsernameNotFoundException("User " + login + " was not found ");
+           throw new UsernameNotFoundException("User " + username + " was not found ");
 
     }
 }
