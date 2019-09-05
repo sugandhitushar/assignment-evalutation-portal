@@ -85,11 +85,14 @@ class Login extends Component {
         
    }
     render() { 
-        return ( 
-            <Table responsive borderless hover  style={{marginTop:"15vh"}}>
-                <tbody>
-                <tr>
-                    <th style={{textAlign:"right"}}><i><h3>Username :</h3></i></th>
+        return (
+            <div> 
+                <form >
+            <Table responsive borderless hover  style={{marginTop:"15vh",marginLeft:"2vh", backgroundColor:"transparent", width:"400px"}}>
+               
+                <tbody style={{boxShadow: "0 8px 15px 0 rgba(0, 0, 0, 0.2), 0 9px 25px 0 rgba(0, 0, 0, 0.19)"}} >
+                <tr style={{opacity:"1"}}>
+                    <th  style={{textAlign:"right", opacity: "1"}}><i><h3>Username :</h3></i></th>
                     <td ><input type="text" name="username" onChange={this.handleChange}></input></td>
                 </tr>
                 <tr>
@@ -98,10 +101,12 @@ class Login extends Component {
                 </tr>
                 <tr>
                     
-                    <td colSpan="2" style={{textAlign:"center"}}><Button variant="success" size="lg" onClick={this.handleLogin}>Login</Button></td>
+                    <td colSpan="2" style={{textAlign:"center"}}><Button variant="primary" size="lg" onClick={this.handleLogin}>Login</Button></td>
                 </tr>
                 </tbody>
             </Table>
+            </form>
+            </div>
          );
     }
 }
