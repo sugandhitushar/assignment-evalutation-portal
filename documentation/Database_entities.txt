@@ -1,0 +1,78 @@
+Class
+ - id
+ - name
+ 
+Division
+ - id
+ - name
+ - capacity
+ - class_teacher_id
+ - class_id
+ - start_year
+ - end_year
+ - status
+ 
+Subject
+ - id
+ - name
+ 
+Subject_Division_Teacher
+ - id 
+ - subject_id
+ - division_id
+ - teacher_id
+ 
+User
+ - id
+ - first_name*
+ - last_name*
+ - email*
+ - phone_no*
+ - password*
+ - avatar
+ - status ['Active', 'Inactive']
+ 
+Teacher
+ - id
+ - user_id
+ - employee_id
+ - designation*
+ - joining_date
+ - relieving_date
+ 
+Student
+ - id
+ - user_id
+ - college_file_number
+ - permanent_registration_number
+ - admission_date
+ - passout_date
+ 
+Student_Division
+ - student_id
+ - division_id
+ - roll_number
+ - status ['Active', 'Inactive']
+ 
+Assignment
+ - id
+ - title
+ - content
+ - attachments
+ - remarks
+ - total_marks
+ - issue_date
+ - issued_by
+ - submission_due_date
+ - subject_division__teacher_id
+ - type
+ - secondary_assessor
+ 
+Student_Assignment
+ - student_id
+ - assignment_id
+ - content
+ - attachments
+ - submission_date
+ - marks
+ - remarks
