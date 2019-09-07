@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Accordion,Card,Button } from 'react-bootstrap';
+import FeaturesCss from '../Features/Features.css'
 class Features extends Component {
     
     render() { 

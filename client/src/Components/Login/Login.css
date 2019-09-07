@@ -1,0 +1,23 @@
+#tab
+{
+    margin-top:15vh;
+    margin-left:2vh;
+    background-color:transparent;
+    width:400px
+}
+#tab_body
+{
+    box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.2), 0 9px 25px 0 rgba(0, 0, 0, 0.19)
+}
+#r1th
+{
+    text-align: right
+}
+#r2th
+{
+    text-align: right
+}
+#r3td
+{
+    text-align: center
+}

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { Table, Button } from 'react-bootstrap';
 import axios from 'axios';
-let jwt = require('jsonwebtoken');
+import LoginCss from '../Login/Login.css'
+//let jwt = require('jsonwebtoken');
 let token={};
 
 class Login extends Component {
@@ -87,25 +88,25 @@ class Login extends Component {
     render() { 
         return (
             <div> 
-                <form >
-            <Table responsive borderless hover  style={{marginTop:"15vh",marginLeft:"2vh", backgroundColor:"transparent", width:"400px"}}>
+                
+            <Table id="tab" responsive borderless hover>
                
-                <tbody style={{boxShadow: "0 8px 15px 0 rgba(0, 0, 0, 0.2), 0 9px 25px 0 rgba(0, 0, 0, 0.19)"}} >
-                <tr style={{opacity:"1"}}>
-                    <th  style={{textAlign:"right", opacity: "1"}}><i><h3>Username :</h3></i></th>
+                <tbody id="tab_body">
+                <tr>
+                    <th id="r1th" ><i><h3>Username :</h3></i></th>
                     <td ><input type="text" name="username" onChange={this.handleChange}></input></td>
                 </tr>
                 <tr>
-                    <th style={{textAlign:"right"}}><i><h3>Password :</h3></i></th>
+                    <th id="r2th"><i><h3>Password :</h3></i></th>
                     <td><input type="password" name="password" onChange={this.handleChange} ></input></td>
                 </tr>
                 <tr>
                     
-                    <td colSpan="2" style={{textAlign:"center"}}><Button variant="primary" size="lg" onClick={this.handleLogin}>Login</Button></td>
+                    <td id="r3td" colSpan="2" ><Button variant="primary" size="lg" onClick={this.handleLogin}>Login</Button></td>
                 </tr>
                 </tbody>
             </Table>
-            </form>
+            
             </div>
          );
     }
