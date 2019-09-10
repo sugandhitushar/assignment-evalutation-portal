@@ -1,0 +1,66 @@
+1. Create Student API - 
+
+POST /v1/student/signup
+Request body - 
+{
+	"first_name": String (Mandatory),
+	"last_name": String (Mandatory),
+	"email": String (Mandatory),
+	"phone_no": String (Mandatory),
+	"password": String (Mandatory),
+	"avatar_url": String (Optional),
+	"gender": String (Mandatory),
+	"college_file_number": String (Optional),
+	"permanent_registration_number": String (Optional),
+	"admission_date": Date (Optional),
+	"division_id": Long (Mandatory)
+}
+
+Repsonse - 
+Status - 201 (Created)
+{
+	"id": String,
+	"first_name": String,
+	"last_name": String,
+	"email": String,
+	"phone_no": String,
+	"avatar_url": String,
+	"gender": String,
+	"college_file_number": String,
+	"permanent_registration_number": String,
+	"admission_date": Date,
+	"division_id": Long
+}
+
+2. Create Teacher API - 
+
+POST /v1/teacher/signup
+Request body - 
+{
+	"first_name": String (Mandatory),
+	"last_name": String (Mandatory),
+	"email": String (Mandatory),
+	"phone_no": String (Mandatory),
+	"password": String (Mandatory),
+	"avatar_url": String (Optional),
+	"gender": String (Mandatory),
+	"employee_id": String (Mandatory),
+	"designation": String (Mandatory),
+	"joining_date": Date (Optional)
+}
+
+Repsonse - 
+Status - 201 (Created)
+{
+	"id": String,
+	"first_name": String,
+	"last_name": String,
+	"email": String,
+	"phone_no": String,
+	"avatar_url": String,
+	"gender": String,
+	"employee_id": String,
+	"designation": String,
+	"joining_date": Date
+}
+
