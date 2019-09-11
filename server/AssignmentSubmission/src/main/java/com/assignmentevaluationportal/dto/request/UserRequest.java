@@ -2,6 +2,9 @@ package com.assignmentevaluationportal.dto.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.assignmentevaluationportal.constants.Gender;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,4 +30,7 @@ public class UserRequest {
 	private String password;
 	
 	private String avatarUrl;
+	
+	@NotNull
+	private Gender gender;
 }

@@ -5,15 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+import com.assignmentevaluationportal.constants.Gender;
 import com.assignmentevaluationportal.constants.UserStatus;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
-@Entity(name = "user")
+@Entity
+@Table(name = "user")
 public class User extends BaseEntity  {
 	
 	@Id
@@ -38,4 +43,6 @@ public class User extends BaseEntity  {
 	private String avatarUrl;
 	
 	private UserStatus status;
+	
+	private Gender gender;
 }
