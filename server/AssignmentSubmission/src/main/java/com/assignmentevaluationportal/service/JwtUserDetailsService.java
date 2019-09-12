@@ -8,18 +8,27 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.assignmentevaluationportal.constants.UserStatus;
+import com.assignmentevaluationportal.repository.UserRepository;
+
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
+	
+	private UserRepository userRepository;
 
-    @Override
+    public JwtUserDetailsService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
+	@Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if ("admin".equals(username)) {
-            // userName= admin password= admin
-            return new User("admin", "$2a$10$hW9X0uF.wePffEJU2EVqbePlsChUFZwIzdBAzDphKxx2G3YmCOx.W",
-                    new ArrayList<>());
-        }else
+		
+		com.assignmentevaluationportal.model.User user = userRepository.findByEmail(username);
+		
+		if(user != null && user.getStatus() == UserStatus.ACTIVE) {
+			return new User(user.getEmail(), user.getPassword(), new ArrayList<>());
+		} else
            throw new UsernameNotFoundException("User " + username + " was not found ");
-
     }
 }

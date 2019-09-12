@@ -1,9 +1,14 @@
 package com.assignmentevaluationportal.model;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -17,17 +22,17 @@ import lombok.NoArgsConstructor;
 @MappedSuperclass
 public class BaseEntity {
 
-	@Column(name =  "created_date", nullable = false, updatable = false)
-	@CreatedDate
-	private long createdDate; 
+	@Column(name = "created_ts", nullable = false, updatable = false)
+	@CreationTimestamp
+	private Timestamp createdTs; 
 	
 	@Column(name = "created_by")
 	@CreatedBy
 	private String createdBy;
 	
-	@Column(name = "modified_date")
-	@LastModifiedDate
-	private long modifiedDate;
+	@Column(name = "modified_ts")
+	@UpdateTimestamp
+	private Timestamp modifiedTs;
 	
 	@Column(name = "modified_by")
 	@LastModifiedBy

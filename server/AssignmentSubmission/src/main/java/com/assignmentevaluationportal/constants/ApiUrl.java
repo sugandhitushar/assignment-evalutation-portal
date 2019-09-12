@@ -8,6 +8,10 @@ public class ApiUrl {
 	public static final String LOGIN_ENDPOINT = "/login";
 	public static final String SIGNUP_ENDPOINT = "/signup";
 	public static final String HELLO_ENDPOINT = "/hello";
+	public static final String TEACHER_ENDPOINT = "/teachers";
+	public static final String STUDENT_ENDPOINT = "/students";
+	public static final String TEACHER_SIGNUP_ENDPOINT = TEACHER_ENDPOINT + SIGNUP_ENDPOINT;
+	public static final String STUDENT_SIGNUP_ENDPOINT = STUDENT_ENDPOINT + SIGNUP_ENDPOINT;
 	
 
 }

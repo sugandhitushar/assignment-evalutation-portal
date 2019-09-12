@@ -9,6 +9,9 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.assignmentevaluationportal.constants.Gender;
+import com.assignmentevaluationportal.constants.UserStatus;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -37,5 +40,17 @@ public class Teacher extends BaseEntity {
 	@OneToOne
 	@MapsId
 	private User user;
+
+	public Teacher(String firstName, String lastName, String email, String phoneNo, String password, String avatarUrl,
+			Gender gender, String employeeId, String designation, LocalDate joiningDate, 
+			LocalDate relievingDate) {
+		this.user = new User(firstName, lastName, email, phoneNo, password, avatarUrl, UserStatus.ACTIVE ,gender);
+		this.employeeId = employeeId;
+		this.designation = designation;
+		this.joiningDate = joiningDate;
+		this.relievingDate = relievingDate;
+	}
+	
+	
 
 }
