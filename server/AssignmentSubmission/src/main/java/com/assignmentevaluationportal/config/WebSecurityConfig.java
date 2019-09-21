@@ -63,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	// Don't authenticate below endpoints
     	.authorizeRequests()
     		.antMatchers(ApiUrl.LOGIN_ENDPOINT).permitAll()
+    		.antMatchers(ApiUrl.REFRESH_TOKEN_ENDPOINT).permitAll()
     		.antMatchers(ApiUrl.BASE_URL_V1 + ApiUrl.TEACHER_SIGNUP_ENDPOINT).permitAll()
     		.antMatchers(ApiUrl.BASE_URL_V1 + ApiUrl.STUDENT_SIGNUP_ENDPOINT).permitAll()
     		.antMatchers("/AssignmentEvaluationPortal/api/swagger-ui.html").permitAll()
