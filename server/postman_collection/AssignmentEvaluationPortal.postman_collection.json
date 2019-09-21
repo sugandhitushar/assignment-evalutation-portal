@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "f6bbc4c6-55d6-4799-bcbc-7775584a87f4",
+		"name": "AssignmentEvaluationPortal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"sugandhi.tushar@gmail.com\",\n\t\"password\": \"Tushar@123\",\n\t\"keepMeSignedIn\": true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/v1/hello",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdWdhbmRoaS50dXNoYXJAZ21haWwuY29tIiwiZXhwIjoxNTY5MDk5MTQ2LCJpYXQiOjE1NjkwOTkwODZ9.vq6r9Ranci4f7IprcpC2rrECf1ZfRdj9OYUSnLe6nRRmDjV-rrWm4YUeYNzfx9UCXuHbosDZSGt9rD9AqeGmtw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/hello",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"hello"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/v1/teachers/signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Tushar\",\n\t\"lastName\": \"Sugandhi\",\n\t\"email\": \"sugandhi.tushar@gmail.com\",\n\t\"phoneNo\": \"+918237218510\",\n\t\"password\": \"Tushar@123\",\n\t\"avatarUrl\": \"tushar.jpg\",\n\t\"gender\": \"MALE\",\n\t\"employeeId\": \"T123\",\n\t\"designation\": \"Assistant professor\",\n\t\"joiningDate\": \"2018-12-11\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/teachers/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"teachers",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/token/refresh",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"refreshToken\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdWdhbmRoaS50dXNoYXJAZ21haWwuY29tIiwiZXhwIjoxNTY5MTAxMzIwLCJpYXQiOjE1NjkwOTk1MjAsImp0aSI6IjQwMmM0NzM5LTAwZTItNGUyYS05ODNkLTQxMmNlN2YyNzgzYyJ9.3d-qh6chwBexDBOiVL2qcum6_NonrdFsjCxuD_U4hHaGV_fAXwXju4GDbTMiqGTEn7B2y7IUX_BTDjylMJQ65g\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/token/refresh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"token",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
