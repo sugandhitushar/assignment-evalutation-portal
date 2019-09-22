@@ -13,7 +13,7 @@
 	<groupId>com.assignmentSubmition</groupId>
 	<artifactId>AssignmentSubmission</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>AssignmentSubmission</name>
+	<name>AssignmentEvaluationPortal</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -30,6 +30,22 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
@@ -39,13 +55,27 @@
 			<version>0.9.1</version>
 		</dependency>
 
+		<!-- Swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Need JAXB for JWT Token creation. JAXB is deprecated and completely removed from JDK 11 SE onwards -->
+		<!-- Need JAXB for JWT Token creation. JAXB is deprecated and completely 
+			removed from JDK 11 SE onwards -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
