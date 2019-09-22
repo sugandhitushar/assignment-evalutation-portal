@@ -1,0 +1,12 @@
+#column
+{
+    padding-left: 0;
+    padding-right: 0;
+    height:75vh;
+    background-color:#B9D3FF;
+    overflow-y:auto
+}
+#ac
+{
+    padding:40px;
+}

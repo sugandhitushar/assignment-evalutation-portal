@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Accordion,Card,Button } from 'react-bootstrap';
-import FeaturesCss from '../Features/Features.css'
+import { Accordion,Card,Button, Container, Col,Row } from 'react-bootstrap';
+import '../Features/Features.css'
 class Features extends Component {
     
     render() { 
         return ( 
-            <div>
-            
-               <Accordion defaultActiveKey="0" style={{marginTop:"15vh"}}>
+                <Col id="column" xl="8">
+               <Accordion id="ac" defaultActiveKey="0">
                 <Card>
                 <Card.Header>
                     <Accordion.Toggle as={Button} variant="link" eventKey="0">
@@ -55,8 +54,11 @@ class Features extends Component {
                             </ul></Card.Body>
                     </Accordion.Collapse>
                 </Card>
-                   </Accordion> 
-            </div>
+                   </Accordion>
+                   </Col>
+                   
+           
+            
          );
     }
 }

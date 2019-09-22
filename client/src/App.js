@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
+import {Row} from 'react-bootstrap'
+import Header from './Components/Header/Index'
+import Features from './Components/Features/Index'
+import Login from './Components/Login/Index'
+import Footer from './Components/Footer/Index'
+import Forget from './Components/ForgetPassword/Index'
+import SignUp from './Components/Signup/Index'
+import {BrowserRouter as Router,Switch,Route} from "react-router-dom"
+import React, { Component } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
+class App extends Component {
+
+  render() { 
+    return (
+      <Router>
+      <Header/>
+      <Row id="row2">
+        <Switch>
+          <Route path="/" exact>
+            <Features/>
+            <Login/>
+          </Route>
+    
+          <Route path="/login" exact>
+            <Features/>
+            <Login/>
+          </Route>
+    
+          <Route path="/forget" exact>
+            <Features/>
+            <Forget/>
+          </Route>
+    
+          <Route path="/new" exact>
+            <SignUp/>
+          </Route>
+    
+        </Switch>
+      </Row>
+      <Footer/>
+      </Router>
+    );
+  }
+}
+ 
 export default App;

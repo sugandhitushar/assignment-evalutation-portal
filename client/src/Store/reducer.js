@@ -2,7 +2,10 @@ const initialStatte={
     logged_in:'false',
     username:"",
     utype:"",
-    token:{}
+    token:{},
+    login:"true",
+    forget:"",
+    new_user:""
 };
 
 const reducer=(state=initialStatte,action)=>{
