@@ -50,6 +50,54 @@ public class Teacher extends BaseEntity {
 		this.joiningDate = joiningDate;
 		this.relievingDate = relievingDate;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public LocalDate getJoiningDate() {
+		return joiningDate;
+	}
+
+	public void setJoiningDate(LocalDate joiningDate) {
+		this.joiningDate = joiningDate;
+	}
+
+	public LocalDate getRelievingDate() {
+		return relievingDate;
+	}
+
+	public void setRelievingDate(LocalDate relievingDate) {
+		this.relievingDate = relievingDate;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 	
 

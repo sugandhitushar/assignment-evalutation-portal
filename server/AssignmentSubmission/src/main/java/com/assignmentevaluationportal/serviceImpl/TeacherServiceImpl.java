@@ -1,6 +1,7 @@
 package com.assignmentevaluationportal.serviceImpl;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -30,4 +31,15 @@ public class TeacherServiceImpl implements TeacherService {
 		return teacher;
 	}
 
+	@Override
+	public Teacher getTeacher(Long id) {
+		System.out.println("Requesting Teacher Details with ID : "+ id);
+		
+		Optional<Teacher> response = teacherRepository.findById(id);                            
+		if(response.isPresent()) {
+			return response.get();
+		}
+		return null;
+	}
+	
 }

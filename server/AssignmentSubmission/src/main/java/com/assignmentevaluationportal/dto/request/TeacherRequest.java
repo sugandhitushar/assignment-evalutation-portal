@@ -20,4 +20,30 @@ public class TeacherRequest extends UserRequest {
 	
 	@NotNull
 	private LocalDate joiningDate;
+
+	public String getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public LocalDate getJoiningDate() {
+		return joiningDate;
+	}
+
+	public void setJoiningDate(LocalDate joiningDate) {
+		this.joiningDate = joiningDate;
+	}
+	
+	
 }

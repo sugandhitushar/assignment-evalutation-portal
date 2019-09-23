@@ -26,6 +26,31 @@ public class TeacherResponse extends UserResponse {
 		this.designation = designation;
 		this.joiningDate = joiningDate;
 	}
+
+	public String getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public LocalDate getJoiningDate() {
+		return joiningDate;
+	}
+
+	public void setJoiningDate(LocalDate joiningDate) {
+		this.joiningDate = joiningDate;
+	}
+	
 	
 	
 }

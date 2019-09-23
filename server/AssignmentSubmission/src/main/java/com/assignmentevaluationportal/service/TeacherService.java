@@ -25,4 +25,5 @@ public interface TeacherService {
 			String password, String avatarUrl, Gender gender, String employeeId,
 			String designation, LocalDate joiningDate);
 
+	public Teacher getTeacher(Long id);
 }

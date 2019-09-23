@@ -42,12 +42,13 @@ public class UserController {
      */
 	@PostMapping(ApiUrl.LOGIN_ENDPOINT)
     public ResponseEntity<?> generateJwtAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-		log.info("Authentication request");
+		log.info("Authentication request: {}", authenticationRequest.getUsername());
+		
+		log.info("Username: " + authenticationRequest.getUsername());
+        log.info("Password: " + authenticationRequest.getPassword());
 		
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-        
-        log.info("Username: " + authenticationRequest.getUsername());
-        log.info("Password: " + authenticationRequest.getPassword());
+       
         UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);

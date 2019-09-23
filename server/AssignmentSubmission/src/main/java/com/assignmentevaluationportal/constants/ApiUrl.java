@@ -12,6 +12,8 @@ public class ApiUrl {
 	public static final String STUDENT_ENDPOINT = "/students";
 	public static final String TEACHER_SIGNUP_ENDPOINT = TEACHER_ENDPOINT + SIGNUP_ENDPOINT;
 	public static final String STUDENT_SIGNUP_ENDPOINT = STUDENT_ENDPOINT + SIGNUP_ENDPOINT;
+	public static final String GET_TEACHER_BY_ID = TEACHER_ENDPOINT + "/{id}";
+
 	
 
 }
