@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import {Button, Form,Col}from 'react-bootstrap';
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from 'react-date-picker'
+import moment from 'moment'
 import "./Signup.css"
+
+
 
 class SignUp extends Component {
     constructor ()
@@ -55,6 +57,7 @@ class SignUp extends Component {
         if(this.validateForm()==="true")
         {
             alert("sucess");
+            console.log(this.state.startDate)
             this.props.history.push('/login');
             /*if(this.state.fields.type==="Student")
             {
@@ -170,6 +173,14 @@ class SignUp extends Component {
                 formIsValid="false";
                 errors['empid']=true
             }
+            if(!fields['rollno'])
+            {
+                errors['rollno']=true
+            }
+            if(!fields['admission_no'])
+            {
+                errors['admission_no']=true
+            }
         
         }
         if(fields['type']==="Student")
@@ -210,6 +221,10 @@ class SignUp extends Component {
                     formIsValid="false";
                     errors['admission_no']=true
                 }
+            }
+            if(!fields['empid'])
+            {
+                errors['empid']=true
             }
         }   
         
@@ -347,7 +362,7 @@ class SignUp extends Component {
                         <Form.Label >Joining Date</Form.Label>
                         <br></br>
                     
-                        <DatePicker
+                         <DatePicker
                         required
                         popperModifiers={{
                             preventOverflow: {
@@ -355,10 +370,11 @@ class SignUp extends Component {
                             },
                           }}
                             dateFormat="dd/MM/yyyy"
-                            selected={this.state.startDate}
+                            value={this.state.startDate}
                             onChange={this.handleChange1}
                         />
-                                        
+                        
+                                    
                         
                     </Form.Group>
                     </Form.Row>
@@ -436,9 +452,9 @@ class SignUp extends Component {
                                     },
                                 }}
                                     dateFormat="dd/MM/yyyy"
-                                    selected={this.state.admissionDate}
+                                    value={this.state.admissionDate}
                                     onChange={this.handleChange2}
-                                />
+                            />
                                         
                         
                     </Form.Group>

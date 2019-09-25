@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Button,Col, Form,Row } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css'
 import {Link} from 'react-router-dom'
@@ -68,13 +69,13 @@ class Login extends Component {
            this.props.onAuthenticate(); //save token in store for further use
            
        })
-       .catch((error)=>{console.log(error)})
+       .catch((error)=>{console.log(error)})*/
        if(this.state.username==="admin" && this.state.password==="admin")
        {
-        this.props.credentials(); //save username and type fro further use
-        this.props.history.push('\admin')
+        //this.props.credentials(); //save username and type fro further use
+            this.props.history.push('\admin')
        
-       }*/
+       }
         
    }
     render() { 
@@ -103,7 +104,7 @@ class Login extends Component {
                         
                             <Form.Control style={{width:"80%"}}
                             required
-                            type="text"
+                            type="password"
                             name="password"
                             placeholder="password"
                             onChange={this.handleChange}
@@ -165,4 +166,4 @@ const mapStateToProps=(state)=>{
     }
 }
  
-export default connect(mapStateToProps,mapDispatchToProps) (Login);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Login));
