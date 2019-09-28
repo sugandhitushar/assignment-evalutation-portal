@@ -12,12 +12,12 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 public class TeacherRequest extends UserRequest {
 
-	@NotBlank
+	@NotBlank(message = "INVALID_EMPLOYEE_ID")
 	private String employeeId;
 	
-	@NotBlank
+	@NotBlank(message = "INVALID_DESIGNATION")
 	private String designation;
 	
-	@NotNull
+	@NotNull(message = "INVALID_JOINING_DATE")
 	private LocalDate joiningDate;
 }

@@ -13,24 +13,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserRequest {
 	
-	@NotBlank
+	@NotBlank(message = "INVALID_FIRST_NAME")
 	private String firstName;
 	
-	@NotBlank
+	@NotBlank(message = "INVALID_LAST_NAME")
 	private String lastName;
 	
-	@NotBlank
-	@Email
+	@NotBlank(message = "INVALID_EMAIL_ID")
+	@Email(message = "INVALID_EMAIL_ID")
 	private String email;
 	
-	@NotBlank
+	@NotBlank(message = "INVALID_PHONE_NO")
 	private String phoneNo;
 	
-	@NotBlank
+	@NotBlank(message = "INVALID_PASSWORD")
 	private String password;
 	
 	private String avatarUrl;
 	
-	@NotNull
+	@NotNull(message = "INVALID_GENDER")
 	private Gender gender;
 }

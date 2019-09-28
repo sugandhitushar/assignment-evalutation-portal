@@ -16,10 +16,10 @@ public class StudentRequest  extends UserRequest {
 	
 	private String permanentRegistrationNumber;
 	
-	@PastOrPresent
+	@PastOrPresent(message = "INVALID_ADMISSION_DATE")
 	private LocalDate admissionDate;
 	
-	@NotNull
+	@NotNull(message = "INVALID_DIVISION_ID")
 	private Long divisionId;
 
 }

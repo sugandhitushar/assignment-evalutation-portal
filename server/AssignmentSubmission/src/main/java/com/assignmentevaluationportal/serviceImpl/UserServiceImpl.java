@@ -1,5 +1,6 @@
 package com.assignmentevaluationportal.serviceImpl;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -8,7 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.assignmentevaluationportal.config.JwtTokenUtil;
+import com.assignmentevaluationportal.constants.AEPError;
 import com.assignmentevaluationportal.dto.response.JwtResponse;
+import com.assignmentevaluationportal.exception.AEPException;
 import com.assignmentevaluationportal.service.JwtUserDetailsService;
 import com.assignmentevaluationportal.service.UserService;
 
@@ -41,18 +44,23 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public JwtResponse generateAccessToken(String refreshToken) throws Exception {
+	public JwtResponse generateAccessToken(String refreshToken) {
+		
+		if(jwtTokenUtil.isTokenExpired(refreshToken)) {
+			throw new AEPException(HttpStatus.BAD_REQUEST, AEPError.REFRESH_TOKEN_EXPIRED);
+		}
+		
 		String email = jwtTokenUtil.getUsernameFromToken(refreshToken);
 		
 		UserDetails userDetails = userDetailsService
                 .loadUserByUsername(email);
 		
-		if(userDetails != null && !jwtTokenUtil.isTokenExpired(refreshToken)) {
+		if(userDetails != null) {
 			String accessToken = jwtTokenUtil.generateAccessToken(userDetails);
 			String newRefreshToken = jwtTokenUtil.generateRefreshToken(userDetails);
 			return new JwtResponse(accessToken, newRefreshToken);
 		} else {
-			throw new RuntimeException("Invalid refresh token: " + refreshToken);
+			throw new AEPException(HttpStatus.BAD_REQUEST, AEPError.USER_NOT_FOUND);
 		}
 	}
 	

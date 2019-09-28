@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.assignmentevaluationportal.constants.ApiUrl;
 import com.assignmentevaluationportal.dto.request.TeacherRequest;
+import com.assignmentevaluationportal.dto.response.Response;
 import com.assignmentevaluationportal.dto.response.TeacherResponse;
 import com.assignmentevaluationportal.model.Teacher;
 import com.assignmentevaluationportal.service.TeacherService;
@@ -30,7 +31,7 @@ public class TeacherController {
 	
 	@PostMapping(ApiUrl.TEACHER_SIGNUP_ENDPOINT)
 	public ResponseEntity<?> signup(@Validated @RequestBody TeacherRequest request) {
-		logger.debug("Teacher Signup API request: ", request);
+		logger.debug("Teacher Signup API request: {}", request);
 		
 		Teacher teacher = teacherService.signup(request.getFirstName(), 
 				request.getLastName(), request.getEmail(), request.getPhoneNo(), 
@@ -42,8 +43,8 @@ public class TeacherController {
 				teacher.getUser().getPhoneNo(), teacher.getUser().getAvatarUrl(), teacher.getUser().getGender(), 
 				teacher.getEmployeeId(), teacher.getDesignation(), teacher.getJoiningDate());
 		
-		logger.debug("Teacher Signup API response: ", response);
-		return ResponseEntity.status(HttpStatus.CREATED).<TeacherResponse>body(response);
+		logger.debug("Teacher Signup API response: {}", response);
+		return ResponseEntity.status(HttpStatus.CREATED).body(Response.<TeacherResponse>getSuccessResponse(response));		
 	}
 	
 
