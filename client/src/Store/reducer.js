@@ -2,7 +2,11 @@ const initialStatte={
     logged_in:'false',
     username:"",
     utype:"",
-    token:{}
+    token:{},
+    login:"true",
+    forget:"",
+    new_user:"",
+    bname:"c"
 };
 
 const reducer=(state=initialStatte,action)=>{
@@ -21,6 +25,10 @@ const reducer=(state=initialStatte,action)=>{
     {
         newState.token=action.val;
         console.log("in reducer token is :",newState.token);
+    }
+    if(action.type==='bchange')
+    {
+        newState.bname=action.val;
     }
     return newState;
 };

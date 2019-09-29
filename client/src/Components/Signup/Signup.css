@@ -1,0 +1,17 @@
+#signup_col
+{
+    padding:20px;
+    background-color:#B9D3FF;
+    height:75vh;
+    overflow-y:auto
+}
+#signup_form
+{
+    border:1px solid #9FC3FD;
+    background-color:white;
+    padding:10px
+}
+#mandatory
+{
+    color:red
+}

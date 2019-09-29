@@ -1,23 +1,16 @@
-#tab
+#log_col
 {
-    margin-top:15vh;
-    margin-left:2vh;
-    background-color:transparent;
-    width:400px
+    padding-left: 0px;
+    padding-right:0px;
+    background-color:#B9D3FF;
 }
-#tab_body
+#log_form
 {
-    box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.2), 0 9px 25px 0 rgba(0, 0, 0, 0.19)
-}
-#r1th
-{
-    text-align: right
-}
-#r2th
-{
-    text-align: right
-}
-#r3td
-{
-    text-align: center
+    margin-top:6vh;
+    margin-left:7vh;
+    margin-bottom:1vh;
+    width:70%;
+    border:1px solid #9FC3FD;
+    padding:20px;
+    background-color:white
 }

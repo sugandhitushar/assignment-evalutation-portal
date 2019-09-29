@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { Table, Button } from 'react-bootstrap';
+import {Button,Col, Form,Row } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import LoginCss from '../Login/Login.css'
-//let jwt = require('jsonwebtoken');
+import './Login.css'
+import {Link} from 'react-router-dom'
+
 let token={};
 
 class Login extends Component {
@@ -15,6 +17,8 @@ class Login extends Component {
         {
             username:"",
             password:"",
+            ValidatedState:false,
+            WrongState:false
         
         }
         this.handleChange=this.handleChange.bind(this);
@@ -27,8 +31,6 @@ class Login extends Component {
             [e.target.name]:e.target.value
         }
     )
-           
-       
    }
    parseJwt(token) {
     if (!token) { return; }
@@ -40,24 +42,18 @@ class Login extends Component {
    {
        e.preventDefault();
        
-       const instance = axios.create({baseURL: 'http://localhost:8080'})
-       instance.post("/authenticate",{username:this.state.username,password:this.state.password})
+       /*const instance = axios.create({baseURL: 'http://localhost:8080'})
+       instance.post("/login",{username:this.state.username,password:this.state.password})
        .then((res)=>
        {
-           console.log(res.data.token);
            token=res.data.token;
            console.log("token is :",token);
            let decodedToken=this.parseJwt(token)
-           //console.log(a.sub)
-
            var isExpired = "true";
            var dateNow = new Date();
            decodedToken.exp*=1000;
-           console.log("token",decodedToken.exp)
-           console.log("current",dateNow.getTime())
            if(decodedToken.exp > dateNow.getTime())
            {
-         //   console.log("Expired :",isExpired);
                isExpired = "false";
                console.log("token is before hello :",token);
                const instance1 = axios.create({baseURL: 'http://localhost:8080',headers:{'Authorization':' Bearer '+token}})
@@ -69,54 +65,96 @@ class Login extends Component {
                })                     
                
            }
-           console.log("Expired :",isExpired);
-           console.log("sub",decodedToken.sub);
            
-           this.props.onAuthenticate();
+           this.props.onAuthenticate(); //save token in store for further use
            
        })
-       .catch((error)=>{console.log(error)})
-    
-       
+       .catch((error)=>{console.log(error)})*/
        if(this.state.username==="admin" && this.state.password==="admin")
        {
-        this.props.credentials();
-        this.props.login();
+        //this.props.credentials(); //save username and type fro further use
+            this.props.history.push('\admin')
+       
        }
         
    }
     render() { 
         return (
-            <div> 
-                
-            <Table id="tab" responsive borderless hover>
-               
-                <tbody id="tab_body">
-                <tr>
-                    <th id="r1th" ><i><h3>Username :</h3></i></th>
-                    <td ><input type="text" name="username" onChange={this.handleChange}></input></td>
-                </tr>
-                <tr>
-                    <th id="r2th"><i><h3>Password :</h3></i></th>
-                    <td><input type="password" name="password" onChange={this.handleChange} ></input></td>
-                </tr>
-                <tr>
-                    
-                    <td id="r3td" colSpan="2" ><Button variant="primary" size="lg" onClick={this.handleLogin}>Login</Button></td>
-                </tr>
-                </tbody>
-            </Table>
-            
-            </div>
+            <Col id="log_col" x1="4">
+                <Form id="log_form" >
+                    <Form.Group as={Col} controlId="validateusername" style={{width:"100%"}}>
+                       
+                        <Form.Label >Your Email</Form.Label>
+                        
+                            <Form.Control style={{width:"80%"}}
+                            required
+                            type="text"
+                            name="username"
+                            placeholder="email"
+                            onChange={this.handleChange}
+                            isValid={this.state.ValidatedState}
+                            isInvalid={this.state.WrongState}
+                            />
+                            <Form.Control.Feedback type="valid">Right!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Wrong!</Form.Control.Feedback>
+                                           
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="validatepassword" style={{width:"100%"}}>
+                        <Form.Label >Password</Form.Label>
+                        
+                            <Form.Control style={{width:"80%"}}
+                            required
+                            type="password"
+                            name="password"
+                            placeholder="password"
+                            onChange={this.handleChange}
+                            isValid={this.state.ValidatedState}
+                            isInvalid={this.state.WrongState}
+                            />
+                            <Form.Control.Feedback type="valid">Right!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Wrong!</Form.Control.Feedback>
+                                           
+                    </Form.Group>
+                    <Form.Group as={Row} controlId="submitdetails" style={{paddingLeft: 0,marginLeft:0,width:"100%"}}>
+                        <Col style={{padding:0}}>
+                           <center>
+                            <Button  onClick={this.handleLogin}>Sign in</Button>
+                            </center>
+                            </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} controlId="links" style={{paddingLeft: 0,marginLeft:0,width:"100%"}}>
+                    <Col style={{padding:0}}>
+                    <center>
+                        <Form.Label >
+                            <ul type="none" style={{paddingLeft:0}}>
+                        
+                            <Link to="/forget">
+                                <li>Forget password?</li>
+                            </Link>
+                            <Link to="/new">
+                                <li>
+                                    Signup?
+                                </li>
+                            </Link>
+                            
+                            </ul>
+                           
+                            
+                        </Form.Label>
+                        </center>
+                        </Col>
+                    </Form.Group>
+                </Form>
+            </Col>
          );
     }
 }
 
 const mapDispatchToProps=(dispatch)=>{
     return{
-        login:()=>dispatch({type:'Login',val:"true"}), //Action Creators
+        //Action Creators
         onAuthenticate:()=>dispatch({type:'AuthenticationAction',val:token}),
-       credentials:()=>dispatch({type:'details',username:"admin",utype:"admin"})
+        credentials:()=>dispatch({type:'details',username:"admin",utype:"admin"})
     }
 }
 
@@ -128,4 +166,4 @@ const mapStateToProps=(state)=>{
     }
 }
  
-export default connect(mapStateToProps,mapDispatchToProps) (Login);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Login));
