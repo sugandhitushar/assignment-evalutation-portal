@@ -7,6 +7,21 @@
 	"item": [
 		{
 			"name": "http://localhost:8080/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58a68af6-1083-4d1a-ab08-409cfa41fbac",
+						"exec": [
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"accessToken\", jsonData.accessToken);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -36,42 +51,87 @@
 					]
 				}
 			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:8080/api/v1/hello",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdWdhbmRoaS50dXNoYXJAZ21haWwuY29tIiwiZXhwIjoxNTY5MDk5MTQ2LCJpYXQiOjE1NjkwOTkwODZ9.vq6r9Ranci4f7IprcpC2rrECf1ZfRdj9OYUSnLe6nRRmDjV-rrWm4YUeYNzfx9UCXuHbosDZSGt9rD9AqeGmtw",
-							"type": "string"
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"sugandhi.tushar@gmail.com\",\n\t\"password\": \"Tushar@123\",\n\t\"keepMeSignedIn\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
 						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/v1/hello",
-					"protocol": "http",
-					"host": [
-						"localhost"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Sep 2019 16:46:09 GMT"
+						}
 					],
-					"port": "8080",
-					"path": [
-						"api",
-						"v1",
-						"hello"
-					]
+					"cookie": [],
+					"body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdWdhbmRoaS50dXNoYXJAZ21haWwuY29tIiwiZXhwIjoxNTY5Nzc3MzY5LCJpYXQiOjE1Njk3NzU1Njl9.nVcaeSUM6TPOOLcTfEvs5FyrWdj2EzTPMp9WLH63OgP2odD3GtrgpBsk4NYpW_xgjQD_e_B0D_0yWZz-u8w-kQ\",\n    \"refreshToken\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdWdhbmRoaS50dXNoYXJAZ21haWwuY29tIiwiZXhwIjoxNTY5Nzc5MTY5LCJpYXQiOjE1Njk3NzU1NjksImp0aSI6IjA2OWRkNjNjLWJmNTktNDk3ZC1iM2QyLWU0YTIxZmUxOWRmMSJ9.4krEflyPI_glzM9Yynxf4rpgvWJqL9TwwgZbM7PjMcRVFjrRgN6l5gk2t0oE4wt-ObVe_jDcxPt7oLxnXbNyMQ\"\n}"
 				}
-			},
-			"response": []
+			]
 		},
 		{
 			"name": "http://localhost:8080/api/v1/teachers/signup",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -83,7 +143,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"firstName\": \"Tushar\",\n\t\"lastName\": \"Sugandhi\",\n\t\"email\": \"sugandhi.tushar@gmail.com\",\n\t\"phoneNo\": \"+918237218510\",\n\t\"password\": \"Tushar@123\",\n\t\"avatarUrl\": \"tushar.jpg\",\n\t\"gender\": \"MALE\",\n\t\"employeeId\": \"T123\",\n\t\"designation\": \"Assistant professor\",\n\t\"joiningDate\": \"2018-12-11\"\n}"
+					"raw": "{\n\t\"firstName\": \"Tushar\",\n\t\"lastName\": \"Sugandhi\",\n\t\"email\": \"sugandhi.tushar@gmail.com\",\n\t\"phoneNo\": \"+918237218510\",\n\t\"password\": \"Tushar@123\",\n\t\"avatarUrl\": \"tushar.jpg\",\n\t\"gender\": \"MALE\",\n\t\"employeeId\": \"T123\",\n\t\"designation\": \"Assistant professor\",\n\t\"joiningDate\": \"1569747359727\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/v1/teachers/signup",
@@ -100,7 +160,83 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"Tushar\",\n\t\"lastName\": \"Sugandhi\",\n\t\"email\": \"sugandhi.tushar@gmail.com\",\n\t\"phoneNo\": \"+918237218510\",\n\t\"password\": \"Tushar@123\",\n\t\"avatarUrl\": \"tushar.jpg\",\n\t\"gender\": \"MALE\",\n\t\"employeeId\": \"T123\",\n\t\"designation\": \"Assistant professor\",\n\t\"joiningDate\": \"1569747359727\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/teachers/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"teachers",
+								"signup"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Sep 2019 16:45:47 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"firstName\": \"Tushar\",\n        \"lastName\": \"Sugandhi\",\n        \"email\": \"sugandhi.tushar@gmail.com\",\n        \"phoneNo\": \"+918237218510\",\n        \"avatarUrl\": \"tushar.jpg\",\n        \"gender\": \"MALE\",\n        \"employeeId\": \"T123\",\n        \"designation\": \"Assistant professor\",\n        \"joiningDate\": 1569695400000\n    }\n}"
+				}
+			]
 		},
 		{
 			"name": "http://localhost:8080/token/refresh",
@@ -116,7 +252,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"refreshToken\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdWdhbmRoaS50dXNoYXJAZ21haWwuY29tIiwiZXhwIjoxNTY5MTAxMzIwLCJpYXQiOjE1NjkwOTk1MjAsImp0aSI6IjQwMmM0NzM5LTAwZTItNGUyYS05ODNkLTQxMmNlN2YyNzgzYyJ9.3d-qh6chwBexDBOiVL2qcum6_NonrdFsjCxuD_U4hHaGV_fAXwXju4GDbTMiqGTEn7B2y7IUX_BTDjylMJQ65g\"\n}",
+					"raw": "{\n\t\"refreshToken\": \"{{accessToken}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -137,6 +273,668 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/v1/courses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"FYMCS\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/courses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"courses"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"FYMCS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/courses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"courses"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Sep 2019 16:46:21 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"FYMCS\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/api/v1/divisions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"A\",\n\t\"capacity\": 100,\n\t\"startYear\": 2019,\n\t\"endYear\": 2020,\n\t\"classTeacherId\": 1,\n\t\"courseId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/divisions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"divisions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"A\",\n\t\"capacity\": 100,\n\t\"startYear\": 2019,\n\t\"endYear\": 2020,\n\t\"classTeacherId\": 1,\n\t\"courseId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/divisions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"divisions"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Sep 2019 16:46:27 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"A\",\n        \"capacity\": 100,\n        \"startYear\": 2019,\n        \"endYear\": 2020,\n        \"classTeacherId\": 1,\n        \"courseId\": 1\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/api/v1/divisions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/courses/1/divisions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"courses",
+						"1",
+						"divisions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/courses/1/divisions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"courses",
+								"1",
+								"divisions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Sep 2019 16:12:43 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"A\",\n            \"capacity\": 100,\n            \"startYear\": 2019,\n            \"endYear\": 2020,\n            \"classTeacherId\": 1,\n            \"courseId\": 1\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/api/v1/courses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/courses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"courses"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/courses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"courses"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Sep 2019 16:12:46 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"FYMCS\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"SYMCS\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/api/v1/divisions",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/divisions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"divisions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/divisions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"divisions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Sep 2019 16:12:51 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"A\",\n            \"capacity\": 100,\n            \"startYear\": 2019,\n            \"endYear\": 2020,\n            \"classTeacherId\": 1,\n            \"courseId\": 1\n        },\n        {\n            \"id\": 2,\n            \"name\": \"A\",\n            \"capacity\": 100,\n            \"startYear\": 2019,\n            \"endYear\": 2020,\n            \"classTeacherId\": 1,\n            \"courseId\": 2\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8080/api/v1/students/signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Sagar\",\n\t\"lastName\": \"Sugandhi\",\n\t\"email\": \"sugandhi.sagar@gmail.com\",\n\t\"phoneNo\": \"+918888888888\",\n\t\"password\": \"Sagar@123\",\n\t\"avatarUrl\": \"sagar.jpg\",\n\t\"gender\": \"MALE\",\n\t\"collegeFileNumber\": \"1001\",\n\t\"permanentRegistrationNumber\": \"120120120120\",\n\t\"admissionDate\": \"1569747359727\",\n\t\"divisionId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/students/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"students",
+						"signup"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"Sagar\",\n\t\"lastName\": \"Sugandhi\",\n\t\"email\": \"sugandhi.sagar@gmail.com\",\n\t\"phoneNo\": \"+918888888888\",\n\t\"password\": \"Sagar@123\",\n\t\"avatarUrl\": \"sagar.jpg\",\n\t\"gender\": \"MALE\",\n\t\"collegeFileNumber\": \"1001\",\n\t\"permanentRegistrationNumber\": \"120120120120\",\n\t\"admissionDate\": \"1569747359727\",\n\t\"divisionId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/students/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"students",
+								"signup"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 29 Sep 2019 16:49:39 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 2,\n        \"firstName\": \"Sagar\",\n        \"lastName\": \"Sugandhi\",\n        \"email\": \"sugandhi.sagar@gmail.com\",\n        \"phoneNo\": \"+918888888888\",\n        \"avatarUrl\": \"sagar.jpg\",\n        \"gender\": \"MALE\",\n        \"collegeFileNumber\": \"1001\",\n        \"permanentRegistrationNumber\": \"120120120120\",\n        \"admissionDate\": 1569695400000,\n        \"divisionId\": 1\n    }\n}"
+				}
+			]
 		}
 	],
 	"protocolProfileBehavior": {}

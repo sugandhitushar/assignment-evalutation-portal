@@ -29,7 +29,7 @@ public class TeacherController {
 		this.teacherService = teacherService;
 	}
 	
-	@PostMapping(ApiUrl.TEACHER_SIGNUP_ENDPOINT)
+	@PostMapping(ApiUrl.TEACHER_SIGNUP)
 	public ResponseEntity<?> signup(@Validated @RequestBody TeacherRequest request) {
 		logger.debug("Teacher Signup API request: {}", request);
 		

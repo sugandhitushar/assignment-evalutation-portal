@@ -11,15 +11,20 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @Entity
 @Table(name = "course")
 public class Course extends BaseEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String name;
+
+	public Course(String name) {
+		super();
+		this.name = name;
+	}
 }

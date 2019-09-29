@@ -1,7 +1,5 @@
 package com.assignmentevaluationportal.service;
 
-import java.time.LocalDate;
-
 import com.assignmentevaluationportal.constants.Gender;
 import com.assignmentevaluationportal.model.Teacher;
 
@@ -23,6 +21,6 @@ public interface TeacherService {
 	 * */
 	public Teacher signup(String firstName, String lastName, String email, String phoneNo, 
 			String password, String avatarUrl, Gender gender, String employeeId,
-			String designation, LocalDate joiningDate);
+			String designation, Long joiningDate);
 
 }

@@ -1,7 +1,5 @@
 package com.assignmentevaluationportal.dto.request;
 
-import java.time.LocalDate;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -19,5 +17,5 @@ public class TeacherRequest extends UserRequest {
 	private String designation;
 	
 	@NotNull(message = "INVALID_JOINING_DATE")
-	private LocalDate joiningDate;
+	private Long joiningDate;
 }

@@ -1,7 +1,5 @@
 package com.assignmentevaluationportal.service;
 
-import java.time.LocalDate;
-
 import com.assignmentevaluationportal.constants.Gender;
 import com.assignmentevaluationportal.model.Student;
 
@@ -24,6 +22,6 @@ public interface StudentService {
 	 * */
 	public Student signup(String firstName, String lastName, String email, String phoneNo, 
 			String password, String avatarUrl, Gender gender, String collegeFileNumber,
-			String permanentRegistrationNumber, LocalDate admissionDate, Long divisionId);
+			String permanentRegistrationNumber, Long admissionDate, Long divisionId);
 
 }

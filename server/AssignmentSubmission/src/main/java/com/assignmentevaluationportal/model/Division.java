@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class Division extends BaseEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String name;
@@ -46,5 +46,18 @@ public class Division extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "course_id", referencedColumnName = "id")
 	private Course course;
+
+	public Division(String name, Integer capacity, Integer startYear, Integer endYear, Teacher classTeacher,
+			Course course) {
+		this.name = name;
+		this.capacity = capacity;
+		this.startYear = startYear;
+		this.endYear = endYear;
+		this.classTeacher = classTeacher;
+		this.course = course;
+		this.status = Status.ACTIVE;
+	}
+	
+	
 
 }

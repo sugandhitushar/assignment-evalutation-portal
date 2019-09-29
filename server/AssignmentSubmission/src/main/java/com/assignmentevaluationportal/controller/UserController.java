@@ -31,7 +31,7 @@ public class UserController {
      * 			A request of type {@link JwtRequest}
      * @return JWT Token
      */
-	@PostMapping(ApiUrl.LOGIN_ENDPOINT)
+	@PostMapping(ApiUrl.LOGIN)
     public ResponseEntity<?> login(@RequestBody JwtRequest authenticationRequest) throws Exception {
 		log.info("Login API:: username: {}", authenticationRequest.getUsername());
         log.debug("Password: " + authenticationRequest.getPassword());
@@ -48,7 +48,7 @@ public class UserController {
      * 			A request of type {@link JwtRequest}
      * @return JWT Token
      */
-	@PostMapping(ApiUrl.REFRESH_TOKEN_ENDPOINT)
+	@PostMapping(ApiUrl.REFRESH_TOKEN)
     public ResponseEntity<?> refreshToken(@RequestBody Map<String, String> requestBody) throws Exception {
 		log.info("Refresh Token API:: refreshToken: {}", requestBody.get("refreshToken"));
 		

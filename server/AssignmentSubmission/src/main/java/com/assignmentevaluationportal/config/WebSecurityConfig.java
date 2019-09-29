@@ -62,10 +62,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	.csrf().disable()
     	// Don't authenticate below endpoints
     	.authorizeRequests()
-    		.antMatchers(ApiUrl.LOGIN_ENDPOINT).permitAll()
-    		.antMatchers(ApiUrl.REFRESH_TOKEN_ENDPOINT).permitAll()
-    		.antMatchers(ApiUrl.BASE_URL_V1 + ApiUrl.TEACHER_SIGNUP_ENDPOINT).permitAll()
-    		.antMatchers(ApiUrl.BASE_URL_V1 + ApiUrl.STUDENT_SIGNUP_ENDPOINT).permitAll()
+    		.antMatchers(ApiUrl.LOGIN).permitAll()
+    		.antMatchers(ApiUrl.REFRESH_TOKEN).permitAll()
+    		.antMatchers(ApiUrl.BASE_URL_V1 + ApiUrl.TEACHER_SIGNUP).permitAll()
+    		.antMatchers(ApiUrl.BASE_URL_V1 + ApiUrl.STUDENT_SIGNUP).permitAll()
     		.antMatchers("/AssignmentEvaluationPortal/api/swagger-ui.html").permitAll()
     	// all other requests need to be authenticated
     	.anyRequest().authenticated().and()
