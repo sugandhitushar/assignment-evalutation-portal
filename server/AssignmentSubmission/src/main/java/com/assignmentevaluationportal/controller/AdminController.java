@@ -86,7 +86,7 @@ public class AdminController {
 		return ResponseEntity.status(HttpStatus.OK).body(Response.<List<DivisionResponse>>getSuccessResponse(divisions));
 	}
 	
-	@GetMapping(ApiUrl.GET_DIVISION_BY_COURSE_ID)
+	@GetMapping(ApiUrl.DIVISION_BY_COURSE_ID)
 	public ResponseEntity<?> getDivisionsByCourse(@PathVariable Long courseId) { 
 		logger.debug("Get divisions by course API request: courseId: {}", courseId);
 		

@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:8080/login",
+			"name": "Login API",
 			"event": [
 				{
 					"listen": "test",
@@ -127,7 +127,7 @@
 			]
 		},
 		{
-			"name": "http://localhost:8080/api/v1/teachers/signup",
+			"name": "Teacher Signup API",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -239,7 +239,7 @@
 			]
 		},
 		{
-			"name": "http://localhost:8080/token/refresh",
+			"name": "Refresh Token API",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -275,7 +275,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/api/v1/courses",
+			"name": "Create Course API",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -402,7 +402,7 @@
 			]
 		},
 		{
-			"name": "http://localhost:8080/api/v1/divisions",
+			"name": "Create Division API",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -529,7 +529,7 @@
 			]
 		},
 		{
-			"name": "http://localhost:8080/api/v1/divisions",
+			"name": "Get All Divisions for a course API",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -628,7 +628,7 @@
 			]
 		},
 		{
-			"name": "http://localhost:8080/api/v1/courses",
+			"name": "Get all courses API",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -723,7 +723,7 @@
 			]
 		},
 		{
-			"name": "http://localhost:8080/api/v1/divisions",
+			"name": "Get all divisions API",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -818,7 +818,7 @@
 			]
 		},
 		{
-			"name": "http://localhost:8080/api/v1/students/signup",
+			"name": "Student Signup API",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -935,6 +935,69 @@
 					"body": "{\n    \"data\": {\n        \"id\": 2,\n        \"firstName\": \"Sagar\",\n        \"lastName\": \"Sugandhi\",\n        \"email\": \"sugandhi.sagar@gmail.com\",\n        \"phoneNo\": \"+918888888888\",\n        \"avatarUrl\": \"sagar.jpg\",\n        \"gender\": \"MALE\",\n        \"collegeFileNumber\": \"1001\",\n        \"permanentRegistrationNumber\": \"120120120120\",\n        \"admissionDate\": 1569695400000,\n        \"divisionId\": 1\n    }\n}"
 				}
 			]
+		},
+		{
+			"name": "Get all teachers API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/teachers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"teachers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get teacher by Id API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/teachers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"teachers",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}

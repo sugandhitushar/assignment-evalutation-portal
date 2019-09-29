@@ -13,9 +13,10 @@ public class ApiUrl {
 	public static final String STUDENTS = "/students";
 	public static final String COURSES =  "/courses";
 	public static final String DIVISIONS = "/divisions";
-	public static final String GET_DIVISION_BY_COURSE_ID = COURSES + "/{courseId}" + DIVISIONS;
+	public static final String DIVISION_BY_COURSE_ID = COURSES + "/{courseId}" + DIVISIONS;
 	public static final String TEACHER_SIGNUP = TEACHERS + SIGNUP;
 	public static final String STUDENT_SIGNUP = STUDENTS + SIGNUP;
+	public static final String TEACHER_BY_ID = ApiUrl.TEACHERS + "/{id}";
 	
 	
 
