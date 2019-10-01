@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -20,6 +23,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtTokenUtil implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	private final Logger log = LoggerFactory.getLogger(JwtTokenUtil.class);
 		
     @Value("${jwt.secret}")
     private String secret;
@@ -37,6 +42,7 @@ public class JwtTokenUtil implements Serializable {
     // Get a field from token body
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
+        log.debug("Claims: {}", claims);
         return claimsResolver.apply(claims);
     }
 
@@ -46,22 +52,39 @@ public class JwtTokenUtil implements Serializable {
     }
 
     // Check if the token is expired
-    private Boolean isTokenExpired(String token) {
+    public Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
 
     // Generate a new token for user
-    public String generateToken(UserDetails userDetails) {
+    public String generateAccessToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, userDetails.getUsername());
+        return doGenerateToken(claims, userDetails.getUsername(), JWTConstants.JWT_ACCESS_TOKEN_VALIDITY_IN_MINUTES);
     }
-
-    private String doGenerateToken(Map<String, Object> claims, String subject) {
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(JWTConstants.JWT_TOKEN_VALIDITY_IN_MINUTES)))
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+    
+ // Generate a new token for user
+    public String generateRefreshToken(UserDetails userDetails) {
+        Map<String, Object> claims = new HashMap<>();
         
+        return Jwts.builder()
+        		.setClaims(claims)
+        		.setId(UUID.randomUUID().toString())
+        		.setSubject(userDetails.getUsername())
+        		.setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(JWTConstants.JWT_REFRESH_TOKEN_VALIDITY_IN_MINUTES)))
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
+    }
+    
+    private String doGenerateToken(Map<String, Object> claims, String subject, Long validityInMinutes) {
+        return Jwts.builder()
+        		.setClaims(claims)
+        		.setSubject(subject)
+        		.setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(validityInMinutes)))
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
     }
 
     // Validate token

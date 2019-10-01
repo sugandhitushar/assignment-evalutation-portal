@@ -1,6 +1,7 @@
 package com.assignmentevaluationportal.dto.response;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 import com.assignmentevaluationportal.constants.Gender;
 
@@ -9,7 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper=true)
 @NoArgsConstructor
 public class TeacherResponse extends UserResponse {
 	
@@ -17,14 +18,14 @@ public class TeacherResponse extends UserResponse {
 	
 	private String designation;
 	
-	private LocalDate joiningDate;
+	private Long joiningDate;
 
 	public TeacherResponse(Long id, String firstName, String lastName, String email, String phoneNo,
 			String avatarUrl, Gender gender, String employeeId, String designation, LocalDate joiningDate) {
 		super(id, firstName, lastName, email, phoneNo, avatarUrl, gender);
 		this.employeeId = employeeId;
 		this.designation = designation;
-		this.joiningDate = joiningDate;
+		this.joiningDate = joiningDate.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
 	}
 	
 	
