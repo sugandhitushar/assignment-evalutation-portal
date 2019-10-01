@@ -6,7 +6,7 @@ import Footer from './Components/Footer/Index'
 import Forget from './Components/ForgetPassword/Index'
 import SignUp from './Components/Signup/Index'
 import Admin from './Components/Admin/Index'
-
+import Teacher from './Components/Teacher/Index.jsx'
 //import Bread from "./Components/Bread/Index"
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom"
 import React, { Component } from 'react';
@@ -42,6 +42,10 @@ class App extends Component {
 
           <Route path="/admin">
           <Admin/>
+          </Route>
+
+          <Route path="/as">
+          <Teacher/>
           </Route>
     
         </Switch>

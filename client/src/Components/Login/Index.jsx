@@ -76,6 +76,12 @@ class Login extends Component {
             this.props.history.push('\admin')
        
        }
+       else if(this.state.username==="teacher" && this.state.password==="teacher")
+       {
+        //this.props.credentials(); //save username and type fro further use
+            this.props.history.push('\as')
+       
+       }
         
    }
     render() { 
@@ -154,7 +160,8 @@ const mapDispatchToProps=(dispatch)=>{
     return{
         //Action Creators
         onAuthenticate:()=>dispatch({type:'AuthenticationAction',val:token}),
-        credentials:()=>dispatch({type:'details',username:"admin",utype:"admin"})
+       // credentials:()=>dispatch({type:'details',username:"admin",utype:"admin"}
+       credentials:()=>dispatch({type:'details',username:"teacher",utype:"teacher"})
     }
 }
 
