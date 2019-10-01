@@ -50,9 +50,9 @@ class ViewUser extends Component {
       {
         if(products[i].name==='a')
         {
-          <Integer className="parseInt">
-n.push(i)
-          </Integer>
+          
+           n.push(i)
+         
         }
       }
       
