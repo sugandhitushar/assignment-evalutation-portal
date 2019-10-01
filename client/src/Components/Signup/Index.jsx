@@ -4,6 +4,7 @@ import axios from "axios";
 import { withRouter } from 'react-router-dom';
 import DatePicker from 'react-date-picker'
 import moment from 'moment'
+import {connect} from 'react-redux'
 import "./Signup.css"
 
 
@@ -499,4 +500,11 @@ class SignUp extends Component {
     }
 }
 
-export default withRouter(SignUp);
+const mapStateToProps=(state)=>
+{
+    return{
+    token:state.token,
+    
+    }
+}
+export default withRouter(connect(mapStateToProps)(SignUp));

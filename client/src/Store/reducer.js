@@ -6,7 +6,13 @@ const initialStatte={
     login:"true",
     forget:"",
     new_user:"",
-    bname:"c"
+    bname:"c",
+    cname:"",
+    division:"",
+    capacity:"",
+    start_year:"",
+    end_year:"",
+    class_teacher:""
 };
 
 const reducer=(state=initialStatte,action)=>{
@@ -29,6 +35,18 @@ const reducer=(state=initialStatte,action)=>{
     if(action.type==='bchange')
     {
         newState.bname=action.val;
+    }
+    if(action.type==='store_class')
+    {
+        newState.cname=action.val;
+    }
+    if(action.type==='store_div')
+    {
+        newState.division=action.division;
+        newState.capacity=action.capacity;
+        newState.start_year=action.start_year;
+        newState.end_year=action.end_year;
+        newState.class_teacher=action.class_teacher;
     }
     return newState;
 };

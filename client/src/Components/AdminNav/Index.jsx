@@ -3,6 +3,7 @@ import { Navbar, NavItem, Nav,NavDropdown, Dropdown,Tab,Tabs, Row, Col } from 'r
 import {Link,NavLink} from "react-router-dom"
 import "./AdminNav.css"
 import CreateClass from "../CreateClass/Index"
+import ViewUser from "../ViewUser/Index"
 class AdminNav extends Component {
    
   render() { 
@@ -12,7 +13,7 @@ class AdminNav extends Component {
           <Tabs justify className="myClass" defaultActiveKey="profile"  >
           <Tab eventKey="home" title="View User" style={{flex: 1,
   textAlign:"center"}}>
-            hiii
+            <ViewUser/>
           </Tab>
           <Tab eventKey="profile" title="Create Class" >
             <CreateClass/>
@@ -21,7 +22,7 @@ class AdminNav extends Component {
         </Col>
         <Col xl="1" style={{padding:0,margin:0}}>
         <Dropdown drop="left" >
-  <Dropdown.Toggle variant="success" id="dropdown-basic">
+  <Dropdown.Toggle variant="primary" id="dropdown-basic">
     Dropdown
   </Dropdown.Toggle>
 

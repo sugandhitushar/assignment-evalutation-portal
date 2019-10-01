@@ -3,6 +3,7 @@ import {Breadcrumb, Row} from "react-bootstrap";
 import {BrowserRouter as Router,Switch,Route} from "react-router-dom"
 import C_Class from "../C_Class/Index"
 import C_Division from "../C_Division/Index"
+import C_Subject from "../C_Subject/Index"
 import {connect} from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap'
 let bname="d"
@@ -68,6 +69,7 @@ class Bread extends Component {
       <Route exact path="/admin" component={C_Class}/>
       <Route exact path="/CreateClass" component={C_Class} />
       <Route exact path="/CreateDivision" component={C_Division} />
+      <Route exact path="/CreateSubjects" component={C_Subject}/>
       </Switch>
       </Row>
       </Router> );

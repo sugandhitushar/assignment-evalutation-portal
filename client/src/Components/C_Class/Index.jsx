@@ -2,18 +2,32 @@ import React, { Component } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import {connect} from "react-redux"
 import {Form} from 'react-bootstrap';
+let cname=""
 class Demo extends Component {
    constructor()
    {
        super()
+       this.state={
+           cname:"FyBsc"
+       }
        this.handleClick=this.handleClick.bind(this)
+       this.handleChange=this.handleChange.bind(this)
    }
+   handleChange(e)
+   {
+       this.setState({
+           cname:e.target.value
+       })
+   }
+
     componentDidMount()
     {
         this.props.onbchange();
     }
     handleClick(e)
     {
+        cname=this.state.cname
+        this.props.onstore()
         this.props.onnext();
         this.props.history.push("/CreateDivision")
     }
@@ -25,7 +39,7 @@ class Demo extends Component {
                 <Form.Group as={Col} controlId="validateClass" >
                             <Form.Label >Class Name</Form.Label>
                             <Form.Control as="select" style={{width:"40%"}}
-                                name="class"
+                                name="cname"
                                 onChange={this.handleChange}
                             >
                                 <option>FyBsc</option>
@@ -52,7 +66,8 @@ const mapDispatchToProps=(dispatch)=>{
     return{
         //Action Creators
         onbchange:()=>dispatch({type:'bchange',val:"c"}),
-        onnext:()=>dispatch({type:'bchange',val:"d"})
+        onnext:()=>dispatch({type:'bchange',val:"d"}),
+        onstore:()=>dispatch({type:'store_class',val:cname})
     }
   }
  
