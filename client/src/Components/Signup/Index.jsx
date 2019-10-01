@@ -60,16 +60,16 @@ class SignUp extends Component {
             alert("sucess");
             console.log(this.state.startDate)
             this.props.history.push('/login');
-            /*if(this.state.fields.type==="Student")
+            if(this.state.fields.type==="Student")
             {
-                const instance = axios.create({baseURL: 'http://localhost:8080',headers:{'Authorization':' Bearer '+this.props.token}})
-                instance.post("/StudentSignup",{firstname:this.state.fields.firstname,lastname:this.state.fields.lastname})
+                const instance = axios.create({baseURL: 'http://localhost:8080'})
+                instance.post("/api/v1/students/STUDENT_SIGNUP",{firstName:this.state.fields.firstname,lastName:this.state.fields.lastname})
                 .then((res)=>
                 {
                     console.log("student signup response",res);
                 })
                 .catch((error)=>{console.log(error)});
-            }*/
+            }
         }
         else
         {
