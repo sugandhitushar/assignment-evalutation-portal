@@ -1,7 +1,5 @@
 package com.assignmentevaluationportal.dto.request;
 
-import java.time.LocalDate;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -12,12 +10,12 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 public class TeacherRequest extends UserRequest {
 
-	@NotBlank
+	@NotBlank(message = "INVALID_EMPLOYEE_ID")
 	private String employeeId;
 	
-	@NotBlank
+	@NotBlank(message = "INVALID_DESIGNATION")
 	private String designation;
 	
-	@NotNull
-	private LocalDate joiningDate;
+	@NotNull(message = "INVALID_JOINING_DATE")
+	private Long joiningDate;
 }

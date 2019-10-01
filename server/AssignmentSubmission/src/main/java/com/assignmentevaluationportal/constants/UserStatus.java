@@ -1,5 +1,5 @@
 package com.assignmentevaluationportal.constants;
 
 public enum UserStatus {
-	INACTIVE, ACTIVE
+	INACTIVE, ACTIVE, NOT_VERIFIED
 }

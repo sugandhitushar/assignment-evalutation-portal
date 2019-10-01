@@ -1,6 +1,6 @@
 package com.assignmentevaluationportal.service;
 
-import java.time.LocalDate;
+import java.util.List;
 
 import com.assignmentevaluationportal.constants.Gender;
 import com.assignmentevaluationportal.model.Teacher;
@@ -23,6 +23,20 @@ public interface TeacherService {
 	 * */
 	public Teacher signup(String firstName, String lastName, String email, String phoneNo, 
 			String password, String avatarUrl, Gender gender, String employeeId,
-			String designation, LocalDate joiningDate);
+			String designation, Long joiningDate);
+
+	/**
+	 * Service to get all teachers
+	 * @return List<Teacher> All teachers
+	 * */
+	public List<Teacher> getAllTeachers();
+	
+	/**
+	 * Get Teacher by Id
+	 * @param id Id of teacher
+	 * @return Teacher teacher corresponding to the id
+	 * */
+	public Teacher getTeacherById(Long id);
+
 
 }
