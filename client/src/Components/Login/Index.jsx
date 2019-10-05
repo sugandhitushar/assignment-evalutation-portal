@@ -7,6 +7,8 @@ import './Login.css'
 import {Link} from 'react-router-dom'
 
 let token={};
+let arr=[];
+let decodedToken=""
 
 class Login extends Component {
    constructor()
@@ -32,45 +34,85 @@ class Login extends Component {
         }
     )
    }
+  
+   componentWillUnmount()
+   {
+       console.log("willl unmount in login token is=",this.props.token,"hiii")
+       /*decodedToken=this.parseJwt(this.props.token)
+          var dateNow = new Date();
+           decodedToken.exp*=1000;
+           if(decodedToken.exp > dateNow.getTime())
+          {console.log("before api")
+           const instance1 = axios.create({baseURL: 'http://localhost:8080',headers:{'Authorization':'Bearer '+this.props.token}}) 
+           instance1.get("/api/v1/teachers")
+           .then((res)=>{
+               for(var i in res.data["data"])
+               {
+                 arr.push({id:res.data["data"][i]["id"],firstname:res.data["data"][i]["firstName"],lastname:res.data["data"][i]["lastName"]})
+                    
+                    
+               }
+               for(var j in arr)
+               {
+                   console.log("array of teacher is :",arr[j])
+               }
+               this.props.ongetTeacher()
+               
+           });
+   
+           
+          }*/
+   }
    parseJwt(token) {
     if (!token) { return; }
-    const base64Url = token.split('.')[1];
+    const base64Url = token.toString().split('.')[1];
     const base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
 }
+
    handleLogin(e)
    {
        e.preventDefault();
        
-       /*const instance = axios.create({baseURL: 'http://localhost:8080'})
-       instance.post("/login",{username:this.state.username,password:this.state.password})
+       const instance = axios.create({baseURL: 'http://localhost:8080'})
+       instance.post("/login",{keepMeSignedIn:false,password:this.state.password,username:this.state.username})
        .then((res)=>
        {
-           token=res.data.token;
+           console.log("In login",res.data);
+          token=res.data.accessToken;
            console.log("token is :",token);
-           let decodedToken=this.parseJwt(token)
-           var isExpired = "true";
-           var dateNow = new Date();
+           this.props.onAuthenticate(); //save token in store for further use
+         
+         
+           console.log("After handle click of login token is :",token)
+           decodedToken=this.parseJwt(token)
+          var dateNow = new Date();
            decodedToken.exp*=1000;
            if(decodedToken.exp > dateNow.getTime())
-           {
-               isExpired = "false";
-               console.log("token is before hello :",token);
-               const instance1 = axios.create({baseURL: 'http://localhost:8080',headers:{'Authorization':' Bearer '+token}})
-               instance1.post("/api/v1/hello")
-               .then((res)=>
+          {console.log("before api")
+           const instance1 = axios.create({baseURL: 'http://localhost:8080',headers:{'Authorization':'Bearer '+token}}) 
+           instance1.get("/api/v1/courses")
+           .then((res)=>{
+               for(var i in res.data["data"])
                {
-                   console.log("hello",res.data);
-        
-               })                     
+                 arr.push({id:res.data["data"][i]["id"],name:res.data["data"][i]["name"]})
+                    
+                    
+               }
+               for(var j in arr)
+               {
+                   console.log("array of course is :",arr[j])
+               }
+               //this.props.ongetTeacher()
                
-           }
+           });
+   
            
-           this.props.onAuthenticate(); //save token in store for further use
-           
+          }
        })
-       .catch((error)=>{console.log(error)})*/
-       if(this.state.username==="admin" && this.state.password==="admin")
+       .catch((error)=>{console.log(error)})
+
+       if(this.state.username==="admin@admin.com" && this.state.password==="Admin@123")
        {
         //this.props.credentials(); //save username and type fro further use
             this.props.history.push('\admin')

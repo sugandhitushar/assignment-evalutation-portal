@@ -3,8 +3,11 @@ import {connect} from 'react-redux';
 import DatePicker from 'react-date-picker'
 import edit from '../../Resources/edit.jpg';
 import evaluation from '../../Resources/evaluation.png';
+import TeacherCreateAssignment from "../TeacherCreateAssignment/Index"
+import TeacherPreviousAssignment from "../TeacherPreviousAssignment/Index"
+import TeacherReceivedAssignment from "../TeacherReceivedAssignment/Index"
 
-import {Row,Col, Container,Tab,Tabs, Button,Form,Table} from 'react-bootstrap';
+import {Row,Col, Container,Tab,Tabs, Button,Form,Table,Dropdown} from 'react-bootstrap';
 //import Teacher from './Teacher.css'
 var bgColors = { "Default": "#81b71a",
                     "Blue": "#00B1E1",
@@ -15,24 +18,38 @@ var bgColors = { "Default": "#81b71a",
 };
 
 class Teacher extends Component {
-    state = {  }
-    handleAdd(e)
-    {
-        if(this.validateForm())
-        {
-            alert("sucess");
-        }
-        else
-        {
-            e.preventDefault();
-        }
-    }
     render() { 
-        
-          
-        return (
+        return ( 
+            <Col xl="12" style={{padding:0,marginLeft:0,marginRight:0}}>
+            <Row style={{padding:0,margin:0,height:"75vh"}}>
+            <Col xl="11"  style={{padding:0,margin:0}}>
+            <Tabs justify className="myClass" defaultActiveKey="CreateAssignment">
+                <Tab eventKey="CreateAssignment" title="Create New Assignment">
+                    <TeacherCreateAssignment/>
+                </Tab>
+                <Tab eventKey="PreviousAssignment" title="Previous Assignment">
+                    <TeacherPreviousAssignment/>
+                </Tab>
+                <Tab eventKey="ReceivedAssignment" title="Received Assignment">
+                    <TeacherReceivedAssignment/>
+                </Tab>
+            </Tabs>
+            </Col>
+            <Col xl="1" style={{padding:0,margin:0}}>
+            <Dropdown drop="left" >
+                <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                    Dropdown
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    <Dropdown.Item href="#/action-1">Change Password</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Logout</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+            </Col>
+            </Row>
+            </Col>
             
-                        <Container fluid="true">
+               /*         <Container fluid="true">
                            
                             
                 <Tabs defaultActiveKey="upload" id="uncontrolled-tab-example">
@@ -329,11 +346,13 @@ class Teacher extends Component {
                 </Tabs>
                 
             </Container>
+            */
+           
             
-            
-        )}
+           );
+        }
     }
-
+     
 
 const mapStateToProps=(state)=>{
     return{

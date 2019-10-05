@@ -3,6 +3,8 @@ import { Row, Col, Button } from 'react-bootstrap';
 import {connect} from "react-redux"
 import {Form} from 'react-bootstrap';
 import axios from 'axios'
+let decodedToken=""
+let id=null
 
 class Demo extends Component {
    constructor()
@@ -101,6 +103,12 @@ class Demo extends Component {
             })
             return valid
     }
+    parseJwt(token) {
+        if (!token) { return; }
+        const base64Url = token.toString().split('.')[1];
+        const base64 = base64Url.replace('-', '+').replace('_', '/');
+        return JSON.parse(window.atob(base64));
+    }
     handleClick(e)
     {
         e.preventDefault()
@@ -108,17 +116,95 @@ class Demo extends Component {
        if(this.validateform11())
        {
            alert("Success")
-            /*
-                const instance = axios.create({baseURL: 'http://localhost:8080',headers:{'Authorization':' Bearer '+this.props.token}})
-                instance.post("/createClass",{cname:this.props.cname,division:this.props.division,capacity:this.props.capacity
-                start_year:this.props.start_year,end_year:this.props.end_year,class_teacher:this.props.class_teacher,subjects:this.state.subjects})
-                .then((res)=>
-                {
-                    console.log("create class response",res);
-                })
-                .catch((error)=>{console.log(error)});
-            */
+           id=null
+           
+           decodedToken=this.parseJwt(this.props.token)
+           var dateNow = new Date();
+            decodedToken.exp*=1000;
+            if(decodedToken.exp > dateNow.getTime())
+           {
+            
+               console.log("not expierd")
+              const instance1 = axios.create({baseURL: 'http://localhost:8080',headers:{'Authorization':'Bearer '+this.props.token}}) 
+               instance1.get("/api/v1/courses")
+               .then((res)=>{
+                   for(var i in res.data["data"])
+                   {
+                       if(res.data["data"][i]["name"]===this.props.cname)
+                        {
+                           id=res.data["data"][i]["id"]
+                           console.log("Existing course id",id)
+                        }
+                        
+                   }
+                   if(id)
+                   {
+                       console.log("Found.....")
+                       instance1.post("/api/v1/divisions",
+                        {capacity: this.props.capacity,
+                        classTeacherId: this.props.class_teacher,
+                        courseId: id,
+                        endYear: this.props.end_year,
+                        name: this.props.division,
+                        startYear: this.props.start_year})
+                        .then((res)=>{
+                            console.log("response of create division",res)
+                        })
+                   }
+                   if(id===null)
+                   {
+                    const instance1 = axios.create({baseURL: 'http://localhost:8080',headers:{'Authorization':'Bearer '+this.props.token}})
+                        instance1.post("/api/v1/courses",{name:this.props.cname})
+                        .then((res)=>
+                        {
+                            console.log("newwwww",res.data["data"]['id'])
+                            id=res.data["data"]['id']
+                            console.log("new id is ",id)
+                            instance1.post("/api/v1/divisions",
+                            {capacity: this.props.capacity,
+                            classTeacherId: this.props.class_teacher,
+                            courseId: id,
+                            endYear: this.props.end_year,
+                            name: this.props.division,
+                            startYear: this.props.start_year})
+                            .then((res)=>{
+                                console.log("response of create division",res)
+                            })
+                            
+                        })
+                   
+                   }
+                   console.log("outside id is ",id)
+                   /*console.log("before create division :capacity:"
+                   + this.props.capacity+
+                   "classTeacherId:"+ this.props.class_teacher+
+                   "courseId:"+ id+
+                   "endYear:"+ this.props.end_year+
+                   "name:"+ this.props.division+
+                   "startYear:"+ this.props.start_year)
+                   instance1.post("/api/v1/divisions",
+                   {capacity: this.props.capacity,
+                   classTeacherId: this.props.class_teacher,
+                   courseId: id,
+                   endYear: this.props.end_year,
+                   name: this.props.division,
+                   startYear: this.props.start_year})
+                   .then((res)=>{
+                    console.log("response of create division",res)
+                   })*/
 
+
+                   
+               
+            })
+               
+                                 
+               
+            }
+           else
+           {
+            console.log("expierd")
+           }
            this.props.onnext();
            this.props.history.push("/CreateClass")
        }

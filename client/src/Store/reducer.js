@@ -12,7 +12,8 @@ const initialStatte={
     capacity:"",
     start_year:"",
     end_year:"",
-    class_teacher:""
+    class_teacher:"",
+    arr:[]
 };
 
 const reducer=(state=initialStatte,action)=>{
@@ -47,6 +48,11 @@ const reducer=(state=initialStatte,action)=>{
         newState.start_year=action.start_year;
         newState.end_year=action.end_year;
         newState.class_teacher=action.class_teacher;
+    }
+    if(action.type==='get_teacher')
+    {
+        newState.arr=action.val;
+        console.log("Inreducer get teacher is : ",newState.arr)
     }
     return newState;
 };

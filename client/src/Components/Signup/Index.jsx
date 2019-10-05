@@ -14,7 +14,7 @@ class SignUp extends Component {
     {
         super();
         this.state={
-            fields:{type:"Teacher",class:"FyBsc",division:"A", designation:"Assistant Professor"},
+            fields:{type:"Teacher",class:"FyBsc",division:"A", designation:"Assistant Professor",gender:"MALE"},
             errors:{firstname:null,lastname:null,email:null,mobile:null,empid:null,password:null,cpassword:null,rollno:null,
                 prn:null,admission_no:null},
             startDate:new Date(),
@@ -58,18 +58,36 @@ class SignUp extends Component {
         if(this.validateForm()==="true")
         {
             alert("sucess");
-            console.log(this.state.startDate)
-            this.props.history.push('/login');
-            if(this.state.fields.type==="Student")
+            console.log("avatarUrl: '' designation:"+ this.state.fields.designation+
+            "email:"+ this.state.fields.email+
+            "employeeId:"+ this.state.fields.empid+
+            "firstName:"+ this.state.fields.firstname+
+            "gender:"+ this.state.fields.gender+
+            "joiningDate:"+ this.state.startDate.getTime()+
+            "lastName:"+ this.state.fields.lastname+
+            "password:"+ this.state.fields.password+
+            "phoneNo: "+this.state.fields.mobile)
+            
+            if(this.state.fields.type==="Teacher")
             {
                 const instance = axios.create({baseURL: 'http://localhost:8080'})
-                instance.post("/api/v1/students/STUDENT_SIGNUP",{firstName:this.state.fields.firstname,lastName:this.state.fields.lastname})
+                instance.post("/api/v1/teachers/signup",{avatarUrl: "",
+                designation: this.state.fields.designation,
+                email: this.state.fields.email,
+                employeeId: this.state.fields.empid,
+                firstName: this.state.fields.firstname,
+                gender: this.state.fields.gender,
+                joiningDate: this.state.startDate.getTime(),
+                lastName: this.state.fields.lastname,
+                password: this.state.fields.password,
+                phoneNo: this.state.fields.mobile})
                 .then((res)=>
                 {
-                    console.log("student signup response",res);
+                    console.log("teacher signup response",res);
                 })
                 .catch((error)=>{console.log(error)});
             }
+            this.props.history.push('/login');
         }
         else
         {
@@ -301,23 +319,20 @@ class SignUp extends Component {
                     </Form.Group>
                     <Form.Group as={Col} controlId="validateGender" style={{width:"100%"}}>
                         <Form.Label >Gender</Form.Label><br></br>
-                        <Form.Check
-                            defaultChecked 
-                            inline
-                            type="radio"
+                        <input type="radio"
+                        
                             name="gender"
-                            label="Male"
-                            id="Male"
+                            value="MALE"
+                            checked={this.state.fields.gender==='MALE'}
                             onChange={this.handleChange}
-                         />
-                         <Form.Check 
-                            inline
-                            type="radio"
+                         />Male
+                         <input type="radio"
+                        
                             name="gender"
-                            label="Female"
-                            id="Female"
+                            value="FEMALE"
+                            checked={this.state.fields.gender==='FEMALE'}
                             onChange={this.handleChange}
-                         />
+                         />Female
                     </Form.Group>
                     <Form.Group as={Col} controlId="validateType" style={{width:"100%"}}>
                         <Form.Label >Type</Form.Label>
