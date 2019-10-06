@@ -4,6 +4,7 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -67,6 +68,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     		.antMatchers(ApiUrl.REFRESH_TOKEN).permitAll()
     		.antMatchers(ApiUrl.BASE_URL_V1 + ApiUrl.TEACHER_SIGNUP).permitAll()
     		.antMatchers(ApiUrl.BASE_URL_V1 + ApiUrl.STUDENT_SIGNUP).permitAll()
+    		.antMatchers(HttpMethod.GET, ApiUrl.BASE_URL_V1 + ApiUrl.COURSES).permitAll()
+    		.antMatchers(HttpMethod.GET, ApiUrl.BASE_URL_V1 + ApiUrl.DIVISION_BY_COURSE_ID).permitAll()
 //    		.antMatchers("/swagger-ui.html").permitAll()
     	// all other requests need to be authenticated
     	.anyRequest().authenticated().and()
