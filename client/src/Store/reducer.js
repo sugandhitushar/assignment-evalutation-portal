@@ -14,7 +14,8 @@ const initialStatte={
     end_year:"",
     class_teacher:"",
     arr:[],
-    carr:[]
+    carr:[],
+    tbread:"c"
 };
 
 const reducer=(state=initialStatte,action)=>{
@@ -37,6 +38,10 @@ const reducer=(state=initialStatte,action)=>{
     if(action.type==='bchange')
     {
         newState.bname=action.val;
+    }
+    if(action.type==='tbreadchange')
+    {
+        newState.tbread=action.val;
     }
     if(action.type==='store_class')
     {
