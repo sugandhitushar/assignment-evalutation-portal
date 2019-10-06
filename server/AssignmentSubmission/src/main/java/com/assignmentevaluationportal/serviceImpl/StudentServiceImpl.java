@@ -41,6 +41,14 @@ public class StudentServiceImpl implements StudentService {
 			}
 		}
 		
+		if(studentRepository.existsByCollegeFileNumber(collegeFileNumber)) {
+			throw new AEPException(AEPError.STUDENT_WITH_COLLEGE_FILE_NUMBER_ALREADY_EXISTS);
+		}
+		
+		if(studentRepository.existsByPermanentRegistrationNumber(permanentRegistrationNumber)) {
+			throw new AEPException(AEPError.STUDENT_WITH_PERMANENT_REGISTRATION_NUMBER_ALREADY_EXISTS);
+		}
+		
 		Optional<Division> division = divisionRepository.findById(divisionId);
 		
 		if(!division.isPresent()) {

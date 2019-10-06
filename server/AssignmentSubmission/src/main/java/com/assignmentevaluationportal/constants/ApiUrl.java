@@ -17,7 +17,7 @@ public class ApiUrl {
 	public static final String TEACHER_SIGNUP = TEACHERS + SIGNUP;
 	public static final String STUDENT_SIGNUP = STUDENTS + SIGNUP;
 	public static final String TEACHER_BY_ID = ApiUrl.TEACHERS + "/{id}";
-	
+	public static final String ALL_STUDENTS_OF_DIVISION = DIVISIONS + "/{divisionId}" + STUDENTS;
 	
 
 }

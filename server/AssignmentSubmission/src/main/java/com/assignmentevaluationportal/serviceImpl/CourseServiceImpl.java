@@ -9,9 +9,11 @@ import com.assignmentevaluationportal.constants.AEPError;
 import com.assignmentevaluationportal.exception.AEPException;
 import com.assignmentevaluationportal.model.Course;
 import com.assignmentevaluationportal.model.Division;
+import com.assignmentevaluationportal.model.Student;
 import com.assignmentevaluationportal.model.Teacher;
 import com.assignmentevaluationportal.repository.CourseRepository;
 import com.assignmentevaluationportal.repository.DivisionRepository;
+import com.assignmentevaluationportal.repository.StudentRepository;
 import com.assignmentevaluationportal.repository.TeacherRepository;
 import com.assignmentevaluationportal.service.CourseService;
 
@@ -21,11 +23,14 @@ public class CourseServiceImpl implements CourseService {
 	CourseRepository courseRepository;
 	TeacherRepository teacherRepository;
 	DivisionRepository divisionRepository;
+	StudentRepository studentRepository;
 
-	public CourseServiceImpl(CourseRepository courseRepository, TeacherRepository teacherRepository, DivisionRepository divisionRepository) {
+	public CourseServiceImpl(CourseRepository courseRepository, TeacherRepository teacherRepository,
+			DivisionRepository divisionRepository, StudentRepository studentRepository) {
 		this.courseRepository = courseRepository;
 		this.teacherRepository = teacherRepository;
 		this.divisionRepository = divisionRepository;
+		this.studentRepository = studentRepository;
 	}
 
 	@Override
@@ -82,6 +87,11 @@ public class CourseServiceImpl implements CourseService {
 		}
 		
 		return divisionRepository.findAllByCourse(courseId);
+	}
+
+	@Override
+	public List<Student> getStudentsByDivision(Long divisionId) {
+		return studentRepository.findAllByDivision(divisionId);
 	}
 	
 	
