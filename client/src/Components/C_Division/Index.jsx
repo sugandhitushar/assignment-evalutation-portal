@@ -12,9 +12,9 @@ class Demo extends Component {
    {
        super()
        this.state={
-           fields:{division:"A"},
+           fields:{},
            loading:true,
-            errors:{capacity:null,start_year:null,end_year:null,class_teacher:null},
+            errors:{capacity:null,start_year:null,end_year:null,class_teacher:null,division:null},
        }
        this.handleClick=this.handleClick.bind(this)
        this.handleChange=this.handleChange.bind(this)
@@ -105,6 +105,11 @@ class Demo extends Component {
                 valid=false
                 errors['end_year']=true
             }
+            if(!fields['division'])
+            {
+                valid=false
+                errors['division']=true
+            }
             if (typeof fields["end_year"] !== "undefined")
                 {
                     var eyear = /^\d+$/;
@@ -132,11 +137,14 @@ class Demo extends Component {
                <Form.Row>
                 <Form.Group as={Col}  >
                             <Form.Label >Division</Form.Label>
-                            <Form.Control as="select" 
+                            <Form.Control 
+                                type="text" 
                                 name="division"
+                                isValid={this.state.errors.division===null?(null):(!this.state.errors.division)}
+                                isInvalid={this.state.errors.division}
                                 onChange={this.handleChange}
                             >
-                                <option>A</option>
+                                
                             </Form.Control>
                 </Form.Group>
                 <Form.Group as={Col}>

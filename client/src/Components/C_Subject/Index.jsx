@@ -125,7 +125,7 @@ class Demo extends Component {
            {
             
                console.log("not expierd")
-              const instance1 = axios.create({baseURL: 'http://localhost:8080',headers:{'Authorization':'Bearer '+this.props.token}}) 
+              const instance1 = axios.create({baseURL: 'http://localhost:8080'}) 
                instance1.get("/api/v1/courses")
                .then((res)=>{
                    for(var i in res.data["data"])
@@ -140,6 +140,7 @@ class Demo extends Component {
                    if(id)
                    {
                        console.log("Found.....")
+                       const instance1 = axios.create({baseURL: 'http://localhost:8080',headers:{'Authorization':'Bearer '+this.props.token}})
                        instance1.post("/api/v1/divisions",
                         {capacity: this.props.capacity,
                         classTeacherId: this.props.class_teacher,

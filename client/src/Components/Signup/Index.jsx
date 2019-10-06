@@ -7,19 +7,20 @@ import moment from 'moment'
 import {connect} from 'react-redux'
 import "./Signup.css"
 
-
+let darr=[]
+let sarr=[{name:"a"},{name:"b"}]
 
 class SignUp extends Component {
     constructor ()
     {
         super();
         this.state={
-            fields:{type:"Teacher",class:"FyBsc",division:"A", designation:"Assistant Professor",gender:"MALE"},
-            errors:{firstname:null,lastname:null,email:null,mobile:null,empid:null,password:null,cpassword:null,rollno:null,
+            fields:{type:"Teacher",designation:"Assistant Professor",gender:"MALE"},
+            errors:{class:null,division:null,firstname:null,lastname:null,email:null,mobile:null,empid:null,password:null,cpassword:null,rollno:null,
                 prn:null,admission_no:null},
             startDate:new Date(),
-            admissionDate:new Date()
-           
+            admissionDate:new Date(),
+           loading:true
             
         };
 
@@ -27,7 +28,57 @@ class SignUp extends Component {
         this.handleClick=this.handleClick.bind(this)
         this.handleChange1=this.handleChange1.bind(this)
         this.handleChange2=this.handleChange2.bind(this)
+        this.chandleChange=this.chandleChange.bind(this)
+    }
+    chandleChange(e)
+    {
+        let fields=this.state.fields;
+            fields[e.target.name]=e.target.value;
+            this.setState(
+                {
+                fields
+                
+                }
+            );
+            darr=[]
+            if(this.state.fields.class)
+            {
+                let id
+                console.log("class is : ",this.state.fields.class)
+                for(var i in this.props.carr)
+                {
+                    if(this.state.fields.class===this.props.carr[i].name)
+                    {
+                        console.log("same...class id is ",this.props.carr[i].id)
+                        id=JSON.stringify(this.props.carr[i].id)
+                    }
+                   // console.log("carr is",this.props.carr[i].name )
+                }
+                
+               const instance1 = axios.create({baseURL: 'http://localhost:8080'}) 
+               instance1.get("/api/v1/courses/"+id+"/divisions")
+               .then((res)=>{
+                    console.log("response of get division by course id: ",res)
+                    let y=new Date().getFullYear()
+                    console.log("current year is :",y)
+                    for(var i in res.data["data"])
+                    {
+                    if(res.data["data"][i]["startYear"]===y)
+                    {
+                        darr.push({id:res.data["data"][i]["id"],name:res.data["data"][i]["name"],startYear:res.data["data"][i]["startYear"]})
+                    }
+                     
+                    }
+                this.setState({
+                    loading:false
+                })
+                for(var j in darr)
+                {
+                    console.log("array of division by course id is :",darr[j])
+                }
 
+               })
+            }
     }
     handleChange1 = date => {
         this.setState({
@@ -50,7 +101,7 @@ class SignUp extends Component {
                 
                 }
             );
-        
+            
         
     }
     handleClick(e)
@@ -87,6 +138,48 @@ class SignUp extends Component {
                 })
                 .catch((error)=>{console.log(error)});
             }
+            else if(this.state.fields.type==="Student")
+            {
+                let did,prn
+                for(var i in darr)
+                {
+                    if(this.state.fields.division===darr[i].name)
+                    {
+                        did=darr[i].id
+                        console.log("same division id is : ",did)
+                    }
+                }
+                if(!this.state.fields.prn)
+                {
+                    console.log("No prn")
+                    prn=""
+                }
+                else
+                {
+                    prn=this.state.fields.prn
+                }
+                let ad=(this.state.admissionDate.getTime())/1000
+                const instance = axios.create({baseURL: 'http://localhost:8080'})
+                instance.post("/api/v1/students/signup",{
+                admissionDate:ad,
+                avatarUrl: "",
+                collegeFileNumber: this.state.fields.admission_no,
+                divisionId:did,
+                email: this.state.fields.email,
+                firstName: this.state.fields.firstname,
+                gender: this.state.fields.gender,
+                lastName: this.state.fields.lastname,
+                password: this.state.fields.password,
+                permanentRegistrationNumber:prn,
+                phoneNo: this.state.fields.mobile})
+                .then((res)=>
+                {
+                    console.log("student signup response",res);
+                })
+                .catch((error)=>{console.log(error)});
+
+
+            }
             this.props.history.push('/login');
         }
         else
@@ -100,6 +193,16 @@ class SignUp extends Component {
         let fields=this.state.fields;
         let formIsValid="true";
         let errors={}
+        if(!fields['class'])
+        {
+            formIsValid="false";
+           errors['class']=true 
+        }
+        if(!fields['division'])
+        {
+            formIsValid="false";
+           errors['division']=true 
+        }
         if(!fields['firstname'])
         {
                         
@@ -199,6 +302,14 @@ class SignUp extends Component {
             if(!fields['admission_no'])
             {
                 errors['admission_no']=true
+            }
+            if(!fields['class'])
+            {
+                errors['class']=true
+            }
+            if(!fields['division'])
+            {
+                errors['division']=true
             }
         
         }
@@ -401,13 +512,18 @@ class SignUp extends Component {
                             <Form.Label >Class</Form.Label>
                             <Form.Control as="select"
                                 name="class"
-                                onChange={this.handleChange}
+                                isValid={this.state.errors.class===null?(null):(!this.state.errors.class)}
+                                    isInvalid={this.state.errors.class}
+                                onChange={this.chandleChange}
                             >
-                                <option>FyBsc</option>
-                                <option>SyBsc</option>
-                                <option>TyBsc</option>
-                                <option>FyMsc</option>
-                                <option>SyMsc</option>
+                               {
+                                            <option disabled selected>---select---</option>
+                                 }
+                                 { this.props.carr.map(function(d, idx){
+                                    return (<option key={idx}>{d.name}</option>)
+                                    })
+                                     
+                                 }
                             </Form.Control>
                             </Form.Group>
                             <Form.Group as={Col} controlId="validateDivision" style={{width:"100%"}}>
@@ -415,8 +531,11 @@ class SignUp extends Component {
                             <Form.Control as="select"
                                 name="division"
                                 onChange={this.handleChange}
+                                isValid={this.state.errors.division===null?(null):(!this.state.errors.division)}
+                                    isInvalid={this.state.errors.division}
                             >
-                                <option>A</option>
+                                <option selected disabled>--Select--</option>
+                                {this.state.loading===true?(console.log("null")):darr.map(function(d, idx){return (<option key={idx}>{d.name}</option>)})}
                             </Form.Control>
                             </Form.Group>
                             <Form.Group as={Col} controlId="validateRoll" style={{width:"100%"}}>
@@ -519,6 +638,7 @@ const mapStateToProps=(state)=>
 {
     return{
     token:state.token,
+    carr:state.carr
     
     }
 }

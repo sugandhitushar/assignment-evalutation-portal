@@ -13,7 +13,8 @@ const initialStatte={
     start_year:"",
     end_year:"",
     class_teacher:"",
-    arr:[]
+    arr:[],
+    carr:[]
 };
 
 const reducer=(state=initialStatte,action)=>{
@@ -53,6 +54,11 @@ const reducer=(state=initialStatte,action)=>{
     {
         newState.arr=action.val;
         console.log("Inreducer get teacher is : ",newState.arr)
+    }
+    if(action.type==='getcourses')
+    {
+        newState.carr=action.val;
+        console.log("Inreducer get course is : ",newState.carr)
     }
     return newState;
 };

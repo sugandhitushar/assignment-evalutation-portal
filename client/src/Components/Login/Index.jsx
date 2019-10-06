@@ -8,7 +8,6 @@ import {Link} from 'react-router-dom'
 
 let token={};
 let arr=[];
-let decodedToken=""
 
 class Login extends Component {
    constructor()
@@ -37,39 +36,23 @@ class Login extends Component {
   
    componentWillUnmount()
    {
-       console.log("willl unmount in login token is=",this.props.token,"hiii")
-       /*decodedToken=this.parseJwt(this.props.token)
-          var dateNow = new Date();
-           decodedToken.exp*=1000;
-           if(decodedToken.exp > dateNow.getTime())
-          {console.log("before api")
-           const instance1 = axios.create({baseURL: 'http://localhost:8080',headers:{'Authorization':'Bearer '+this.props.token}}) 
-           instance1.get("/api/v1/teachers")
+           const instance1 = axios.create({baseURL: 'http://localhost:8080'}) 
+           instance1.get("/api/v1/courses")
            .then((res)=>{
                for(var i in res.data["data"])
                {
-                 arr.push({id:res.data["data"][i]["id"],firstname:res.data["data"][i]["firstName"],lastname:res.data["data"][i]["lastName"]})
-                    
-                    
+                 arr.push({id:res.data["data"][i]["id"],name:res.data["data"][i]["name"]})
                }
                for(var j in arr)
                {
-                   console.log("array of teacher is :",arr[j])
+                   console.log("array of course is :",arr[j])
                }
-               this.props.ongetTeacher()
+               this.props.ongetCourse()
                
            });
-   
-           
-          }*/
-   }
-   parseJwt(token) {
-    if (!token) { return; }
-    const base64Url = token.toString().split('.')[1];
-    const base64 = base64Url.replace('-', '+').replace('_', '/');
-    return JSON.parse(window.atob(base64));
-}
 
+   }
+  
    handleLogin(e)
    {
        e.preventDefault();
@@ -84,7 +67,7 @@ class Login extends Component {
            this.props.onAuthenticate(); //save token in store for further use
          
          
-           console.log("After handle click of login token is :",token)
+         /*  console.log("After handle click of login token is :",token)
            decodedToken=this.parseJwt(token)
           var dateNow = new Date();
            decodedToken.exp*=1000;
@@ -108,7 +91,7 @@ class Login extends Component {
            });
    
            
-          }
+          }*/
        })
        .catch((error)=>{console.log(error)})
 
@@ -202,6 +185,7 @@ const mapDispatchToProps=(dispatch)=>{
     return{
         //Action Creators
         onAuthenticate:()=>dispatch({type:'AuthenticationAction',val:token}),
+        ongetCourse:()=>dispatch({type:'getcourses',val:arr}),
        // credentials:()=>dispatch({type:'details',username:"admin",utype:"admin"}
        credentials:()=>dispatch({type:'details',username:"teacher",utype:"teacher"})
     }
