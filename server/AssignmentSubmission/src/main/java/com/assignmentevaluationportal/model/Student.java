@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import com.assignmentevaluationportal.constants.Gender;
 import com.assignmentevaluationportal.constants.UserStatus;
+import com.assignmentevaluationportal.constants.UserType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -51,7 +52,7 @@ public class Student extends BaseEntity {
 	public Student(String firstName, String lastName, String email, String phoneNo, String password, String avatarUrl,
 			Gender gender, String collegeFileNumber, String permanentRegistrationNumber, LocalDate admissionDate,
 			LocalDate passoutDate, Division division) {
-		this.user = new User(firstName, lastName, email, phoneNo, password, avatarUrl, UserStatus.ACTIVE ,gender);
+		this.user = new User(firstName, lastName, email, phoneNo, password, avatarUrl, UserStatus.ACTIVE ,gender, UserType.STUDENT);
 		this.collegeFileNumber = collegeFileNumber;
 		this.permanentRegistrationNumber = permanentRegistrationNumber;
 		this.admissionDate = admissionDate;

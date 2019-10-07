@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import com.assignmentevaluationportal.constants.Gender;
 import com.assignmentevaluationportal.constants.UserStatus;
+import com.assignmentevaluationportal.constants.UserType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -44,7 +45,7 @@ public class Teacher extends BaseEntity {
 	public Teacher(String firstName, String lastName, String email, String phoneNo, String password, String avatarUrl,
 			Gender gender, String employeeId, String designation, LocalDate joiningDate, 
 			LocalDate relievingDate) {
-		this.user = new User(firstName, lastName, email, phoneNo, password, avatarUrl, UserStatus.ACTIVE ,gender);
+		this.user = new User(firstName, lastName, email, phoneNo, password, avatarUrl, UserStatus.ACTIVE ,gender, UserType.TEACHER);
 		this.employeeId = employeeId;
 		this.designation = designation;
 		this.joiningDate = joiningDate;

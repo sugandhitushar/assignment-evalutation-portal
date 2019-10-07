@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.assignmentevaluationportal.constants.JWTConstants;
+import com.assignmentevaluationportal.model.User;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -58,19 +59,21 @@ public class JwtTokenUtil implements Serializable {
     }
 
     // Generate a new token for user
-    public String generateAccessToken(UserDetails userDetails) {
+    public String generateAccessToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, userDetails.getUsername(), JWTConstants.JWT_ACCESS_TOKEN_VALIDITY_IN_MINUTES);
+        claims.put(JWTConstants.CLAIM_USER_TYPE_NAME, user.getUserType());
+        return doGenerateToken(claims, user.getEmail(), JWTConstants.JWT_ACCESS_TOKEN_VALIDITY_IN_MINUTES);
     }
     
  // Generate a new token for user
-    public String generateRefreshToken(UserDetails userDetails) {
+    public String generateRefreshToken(User user) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put(JWTConstants.CLAIM_USER_TYPE_NAME, user.getUserType());
         
         return Jwts.builder()
         		.setClaims(claims)
         		.setId(UUID.randomUUID().toString())
-        		.setSubject(userDetails.getUsername())
+        		.setSubject(user.getEmail())
         		.setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(JWTConstants.JWT_REFRESH_TOKEN_VALIDITY_IN_MINUTES)))
                 .signWith(SignatureAlgorithm.HS512, secret)

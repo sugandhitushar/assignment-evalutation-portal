@@ -4,5 +4,7 @@ public class JWTConstants {
 
 	public static final Long JWT_ACCESS_TOKEN_VALIDITY_IN_MINUTES = 30L;
 	public static final Long JWT_REFRESH_TOKEN_VALIDITY_IN_MINUTES = 60L;
+	
+	public static final String CLAIM_USER_TYPE_NAME = "userType";
 
 }

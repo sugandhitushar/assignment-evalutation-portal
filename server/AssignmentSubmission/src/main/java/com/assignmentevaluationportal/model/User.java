@@ -9,6 +9,7 @@ import javax.persistence.Table;
 
 import com.assignmentevaluationportal.constants.Gender;
 import com.assignmentevaluationportal.constants.UserStatus;
+import com.assignmentevaluationportal.constants.UserType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -45,9 +46,11 @@ public class User extends BaseEntity  {
 	private UserStatus status;
 	
 	private Gender gender;
+	
+	private UserType userType;
 
 	public User(String firstName, String lastName, String email, String phoneNo, String password, String avatarUrl,
-			UserStatus status, Gender gender) {
+			UserStatus status, Gender gender, UserType userType) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -56,5 +59,6 @@ public class User extends BaseEntity  {
 		this.avatarUrl = avatarUrl;
 		this.status = status;
 		this.gender = gender;
+		this.userType = userType;
 	}
 }
