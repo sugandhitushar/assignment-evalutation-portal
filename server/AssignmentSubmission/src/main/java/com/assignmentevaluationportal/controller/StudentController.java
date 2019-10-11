@@ -37,12 +37,14 @@ public class StudentController {
 		Student student = studentService.signup(request.getFirstName(), request.getLastName(), 
 				request.getEmail(), request.getPhoneNo(), request.getPassword(), request.getAvatarUrl(), 
 				request.getGender(), request.getCollegeFileNumber(), request.getPermanentRegistrationNumber(), 
-				request.getAdmissionDate(), request.getDivisionId());
+				request.getAdmissionDate(), request.getDivisionId(), request.getRollNumber());
 		
 		StudentResponse response = new StudentResponse(student.getId(), student.getUser().getFirstName(), 
 				student.getUser().getLastName(), student.getUser().getEmail(), student.getUser().getPhoneNo(), 
 				student.getUser().getAvatarUrl(), student.getUser().getGender(), student.getCollegeFileNumber(), 
-				student.getPermanentRegistrationNumber(), student.getAdmissionDate(), student.getDivision().getId());
+				student.getPermanentRegistrationNumber(), student.getAdmissionDate(), 
+				student.getActiveDivision() != null ? student.getActiveDivision().getId() : null, 
+				student.getActiveStudentDivision() != null ? student.getActiveStudentDivision().getRollNumber() : null);
 		
 		logger.debug("Student Signup API response: {}", response);
 		return ResponseEntity.status(HttpStatus.CREATED).body(Response.<StudentResponse>getSuccessResponse(response));		

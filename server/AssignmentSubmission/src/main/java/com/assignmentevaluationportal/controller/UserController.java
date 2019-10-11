@@ -2,9 +2,13 @@ package com.assignmentevaluationportal.controller;
 
 import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +21,7 @@ import com.assignmentevaluationportal.service.UserService;
 @RestController
 public class UserController {
 
-    private final Logger log = LoggerFactory.getLogger(UserController.class);
+    private final Logger logger = LoggerFactory.getLogger(UserController.class);
     
     private UserService userService;
     
@@ -33,8 +37,8 @@ public class UserController {
      */
 	@PostMapping(ApiUrl.LOGIN)
     public ResponseEntity<?> login(@RequestBody JwtRequest authenticationRequest) throws Exception {
-		log.info("Login API:: username: {}", authenticationRequest.getUsername());
-        log.debug("Password: " + authenticationRequest.getPassword());
+		logger.info("Login API:: username: {}", authenticationRequest.getUsername());
+        logger.debug("Password: " + authenticationRequest.getPassword());
 		
 		JwtResponse response = userService.login(authenticationRequest.getUsername(), 
 				authenticationRequest.getPassword(), authenticationRequest.isKeepMeSignedIn());
@@ -50,13 +54,34 @@ public class UserController {
      */
 	@PostMapping(ApiUrl.REFRESH_TOKEN)
     public ResponseEntity<?> refreshToken(@RequestBody Map<String, String> requestBody) throws Exception {
-		log.info("Refresh Token API:: refreshToken: {}", requestBody.get("refreshToken"));
+		logger.info("Refresh Token API:: refreshToken: {}", requestBody.get("refreshToken"));
 		
 		JwtResponse response = userService.generateAccessToken(requestBody.get("refreshToken"));
 		
 		return ResponseEntity.ok(response);
     }
 	
+	@PostMapping(ApiUrl.VERIFY_USER)
+	public ResponseEntity<?> verifyUser(
+			@PathVariable @NotNull(message = "INVALID_USER_ID") Long id) {
+		logger.info("Verify User API request: id: {}", id);
+		
+		userService.verifyUser(id);
+		
+		logger.info("Verify User API response: success");
+		return ResponseEntity.status(HttpStatus.OK).body(null);
+	}
+	
+	@PostMapping(ApiUrl.REJECT_USER)
+	public ResponseEntity<?> rejectUser(
+			@PathVariable @NotNull(message = "INVALID_USER_ID") Long id) {
+		logger.info("Reject User API request: id: {}", id);
+		
+		userService.rejectUser(id);
+		
+		logger.info("Reject User API response: success");
+		return ResponseEntity.status(HttpStatus.OK).body(null);
+	}
 	
 	
 }

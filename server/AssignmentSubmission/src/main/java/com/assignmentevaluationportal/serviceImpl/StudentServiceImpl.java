@@ -3,6 +3,7 @@ package com.assignmentevaluationportal.serviceImpl;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -12,7 +13,9 @@ import com.assignmentevaluationportal.constants.Gender;
 import com.assignmentevaluationportal.exception.AEPException;
 import com.assignmentevaluationportal.model.Division;
 import com.assignmentevaluationportal.model.Student;
+import com.assignmentevaluationportal.model.StudentDivision;
 import com.assignmentevaluationportal.repository.DivisionRepository;
+import com.assignmentevaluationportal.repository.StudentDivisionRepository;
 import com.assignmentevaluationportal.repository.StudentRepository;
 import com.assignmentevaluationportal.service.StudentService;
 import com.assignmentevaluationportal.util.PasswordUtil;
@@ -22,16 +25,19 @@ public class StudentServiceImpl implements StudentService {
 
 	private DivisionRepository divisionRepository;
 	private StudentRepository studentRepository;
-	
-	public StudentServiceImpl(DivisionRepository divisionRepository, StudentRepository studentRepository) {
+	private StudentDivisionRepository studentDivisionRepository;
+
+	public StudentServiceImpl(DivisionRepository divisionRepository, StudentRepository studentRepository,
+			StudentDivisionRepository studentDivisionRepository) {
 		this.divisionRepository = divisionRepository;
 		this.studentRepository = studentRepository;
+		this.studentDivisionRepository = studentDivisionRepository;
 	}
 
 	@Override
 	public Student signup(String firstName, String lastName, String email, String phoneNo, String password,
 			String avatarUrl, Gender gender, String collegeFileNumber, String permanentRegistrationNumber,
-			Long admissionDate, Long divisionId) {
+			Long admissionDate, Long divisionId, Integer rollNumber) {
 		
 		LocalDate admissionLocalDate = null;
 		if(admissionDate != null) {
@@ -56,9 +62,21 @@ public class StudentServiceImpl implements StudentService {
 		}
 		
 		Student student = new Student(firstName, lastName, email, phoneNo, PasswordUtil.encrypt(password), avatarUrl, 
-				gender, collegeFileNumber, permanentRegistrationNumber, admissionLocalDate, null, division.get());
+				gender, collegeFileNumber, permanentRegistrationNumber, admissionLocalDate, null);
 		
-		return studentRepository.saveAndFlush(student);		
+		student = studentRepository.saveAndFlush(student);
+		
+		StudentDivision studentDivision = new StudentDivision(student, division.get(), rollNumber);
+		studentDivisionRepository.saveAndFlush(studentDivision);
+		
+		student.addDivision(studentDivision);
+		
+		return student;		
+	}
+	
+	@Override
+	public List<Student> getStudentsByDivision(Long divisionId) {
+		return studentRepository.findAllByDivision(divisionId);
 	}
 
 }

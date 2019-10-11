@@ -831,7 +831,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"firstName\": \"Sagar\",\n\t\"lastName\": \"Sugandhi\",\n\t\"email\": \"sugandhi.sagar@gmail.com\",\n\t\"phoneNo\": \"+918888888888\",\n\t\"password\": \"Sagar@123\",\n\t\"avatarUrl\": \"sagar.jpg\",\n\t\"gender\": \"MALE\",\n\t\"collegeFileNumber\": \"1001\",\n\t\"permanentRegistrationNumber\": \"120120120120\",\n\t\"admissionDate\": \"1569747359727\",\n\t\"divisionId\": 1\n}",
+					"raw": "{\n\t\"firstName\": \"Sagar\",\n\t\"lastName\": \"Sugandhi\",\n\t\"email\": \"sugandhi.sagar@gmail.com\",\n\t\"phoneNo\": \"+918888888888\",\n\t\"password\": \"Sagar@123\",\n\t\"avatarUrl\": \"sagar.jpg\",\n\t\"gender\": \"MALE\",\n\t\"collegeFileNumber\": \"1001\",\n\t\"permanentRegistrationNumber\": \"120120120120\",\n\t\"admissionDate\": \"1569747359727\",\n\t\"divisionId\": 1,\n\t\"rollNumber\": 1\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1027,6 +1027,168 @@
 						"divisions",
 						"1",
 						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Subject API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"CS-101\",\n\t\"name\": \"DAA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/subjects",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"subjects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Subject Teacher to Division API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"subjectId\": \"CS-101\",\n\t\"teacherId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/divisions/1/subjects",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"divisions",
+						"1",
+						"subjects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify User API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/2/verify",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"2",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reject User API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/2/reject",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"2",
+						"reject"
 					]
 				}
 			},

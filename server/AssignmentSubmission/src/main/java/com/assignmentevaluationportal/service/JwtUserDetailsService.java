@@ -33,7 +33,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		
 		com.assignmentevaluationportal.model.User user = userRepository.findByEmail(username);
 		
-		if(user != null && user.getStatus() == UserStatus.ACTIVE) {
+		if(user != null && user.getStatus() == UserStatus.NOT_VERIFIED) {
 			return new User(user.getEmail(), user.getPassword(), new ArrayList<>());
 		} else {
 			logger.error("User not found with username: {}", username);

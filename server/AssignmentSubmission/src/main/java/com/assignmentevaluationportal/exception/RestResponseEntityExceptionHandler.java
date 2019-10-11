@@ -28,7 +28,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
 	@ExceptionHandler(value = {AEPException.class})
 	public ResponseEntity<Object> handleAEPException(AEPException ex, WebRequest request) {
-		logger.error("AEPException error: {}", ex);
+		logger.error("AEPException error: " + ex.getErrors());
 		return ResponseEntity.status(ex.status).body(Response.getErrorResponse(ex.errors));
 	}
 	

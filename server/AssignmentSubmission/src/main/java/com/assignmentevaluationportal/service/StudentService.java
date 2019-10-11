@@ -1,5 +1,7 @@
 package com.assignmentevaluationportal.service;
 
+import java.util.List;
+
 import com.assignmentevaluationportal.constants.Gender;
 import com.assignmentevaluationportal.model.Student;
 
@@ -22,6 +24,13 @@ public interface StudentService {
 	 * */
 	public Student signup(String firstName, String lastName, String email, String phoneNo, 
 			String password, String avatarUrl, Gender gender, String collegeFileNumber,
-			String permanentRegistrationNumber, Long admissionDate, Long divisionId);
+			String permanentRegistrationNumber, Long admissionDate, Long divisionId, Integer rollNumber);
+	
+	/**
+	 * Get students by division
+	 * @param divisionId Division id
+	 * @return List<Student> List of all students
+	 * */
+	public List<Student> getStudentsByDivision(Long divisionId);
 
 }

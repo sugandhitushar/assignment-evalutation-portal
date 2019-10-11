@@ -1,6 +1,7 @@
 package com.assignmentevaluationportal.service;
 
 import com.assignmentevaluationportal.dto.response.JwtResponse;
+import com.assignmentevaluationportal.model.User;
 
 public interface UserService {
 	
@@ -19,5 +20,19 @@ public interface UserService {
 	 * @return JwtResponse JWT token for the user
 	 * */
 	public JwtResponse generateAccessToken(String refreshToken) throws Exception;
+	
+	/**
+	 * Verify User
+	 * @param id User id
+	 * @return User Verified user
+	 * */
+	public User verifyUser(Long id);
+	
+	/**
+	 * Reject User
+	 * @param id User id
+	 * @return void
+	 * */
+	public void rejectUser(Long id);
 
 }

@@ -1,5 +1,9 @@
 package com.assignmentevaluationportal.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -46,6 +51,12 @@ public class Division extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "course_id", referencedColumnName = "id")
 	private Course course;
+	
+	@OneToMany(mappedBy = "division", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<StudentDivision> studentDivisions = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "division", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<DivisionSubjectTeacher> divisionSubjectTeachers = new ArrayList<>();
 
 	public Division(String name, Integer capacity, Integer startYear, Integer endYear, Teacher classTeacher,
 			Course course) {
@@ -57,7 +68,4 @@ public class Division extends BaseEntity {
 		this.course = course;
 		this.status = Status.ACTIVE;
 	}
-	
-	
-
 }

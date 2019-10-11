@@ -1,11 +1,15 @@
 package com.assignmentevaluationportal.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -41,11 +45,14 @@ public class Teacher extends BaseEntity {
 	@OneToOne
 	@MapsId
 	private User user;
+	
+	@OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<DivisionSubjectTeacher> divisionSubjectTeachers = new ArrayList<>();
 
 	public Teacher(String firstName, String lastName, String email, String phoneNo, String password, String avatarUrl,
 			Gender gender, String employeeId, String designation, LocalDate joiningDate, 
 			LocalDate relievingDate) {
-		this.user = new User(firstName, lastName, email, phoneNo, password, avatarUrl, UserStatus.ACTIVE ,gender, UserType.TEACHER);
+		this.user = new User(firstName, lastName, email, phoneNo, password, avatarUrl, UserStatus.NOT_VERIFIED ,gender, UserType.TEACHER);
 		this.employeeId = employeeId;
 		this.designation = designation;
 		this.joiningDate = joiningDate;

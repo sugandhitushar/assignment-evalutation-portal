@@ -17,5 +17,8 @@ public class StudentRequest extends UserRequest {
 
 	@NotNull(message = "INVALID_DIVISION_ID")
 	private Long divisionId;
+	
+	@NotNull(message = "INVALID_ROLL_NUMBER")
+	private Integer rollNumber;
 
 }
