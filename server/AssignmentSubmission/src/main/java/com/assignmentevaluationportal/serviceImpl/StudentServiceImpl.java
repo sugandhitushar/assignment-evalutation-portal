@@ -79,4 +79,9 @@ public class StudentServiceImpl implements StudentService {
 		return studentRepository.findAllByDivision(divisionId);
 	}
 
+	@Override
+	public List<Student> getAllStudents() {
+		return studentRepository.findAll();
+	}
+
 }

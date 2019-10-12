@@ -32,5 +32,11 @@ public interface StudentService {
 	 * @return List<Student> List of all students
 	 * */
 	public List<Student> getStudentsByDivision(Long divisionId);
+	
+	/**
+	 * Get all students
+	 * @return List<Student> List of all students
+	 * */
+	public List<Student> getAllStudents();
 
 }

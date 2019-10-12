@@ -46,7 +46,7 @@ public class TeacherController {
 		TeacherResponse response = new TeacherResponse(teacher.getId(), teacher.getUser().getFirstName(), 
 				teacher.getUser().getLastName(), teacher.getUser().getEmail(), 
 				teacher.getUser().getPhoneNo(), teacher.getUser().getAvatarUrl(), teacher.getUser().getGender(), 
-				teacher.getEmployeeId(), teacher.getDesignation(), teacher.getJoiningDate());
+				teacher.getUser().getStatus(), teacher.getEmployeeId(), teacher.getDesignation(), teacher.getJoiningDate());
 		
 		logger.debug("Teacher Signup API response: {}", response);
 		return ResponseEntity.status(HttpStatus.CREATED).body(Response.<TeacherResponse>getSuccessResponse(response));		
@@ -60,7 +60,7 @@ public class TeacherController {
 				.map(teacher -> new TeacherResponse(teacher.getId(), teacher.getUser().getFirstName(), 
 						teacher.getUser().getLastName(), teacher.getUser().getEmail(), 
 						teacher.getUser().getPhoneNo(), teacher.getUser().getAvatarUrl(), teacher.getUser().getGender(), 
-						teacher.getEmployeeId(), teacher.getDesignation(), teacher.getJoiningDate()))
+						teacher.getUser().getStatus(), teacher.getEmployeeId(), teacher.getDesignation(), teacher.getJoiningDate()))
 				.collect(Collectors.toList());
 		
 		logger.debug("Get all teachers API response: {}", teachers);
@@ -78,7 +78,7 @@ public class TeacherController {
 			response = new TeacherResponse(teacher.getId(), teacher.getUser().getFirstName(), 
 					teacher.getUser().getLastName(), teacher.getUser().getEmail(), 
 					teacher.getUser().getPhoneNo(), teacher.getUser().getAvatarUrl(), teacher.getUser().getGender(), 
-					teacher.getEmployeeId(), teacher.getDesignation(), teacher.getJoiningDate());
+					teacher.getUser().getStatus(), teacher.getEmployeeId(), teacher.getDesignation(), teacher.getJoiningDate());
 		}
 		
 		logger.debug("Get teacher by id API response: {}", response);

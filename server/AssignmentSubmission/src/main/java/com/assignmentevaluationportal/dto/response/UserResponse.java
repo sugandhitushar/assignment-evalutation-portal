@@ -1,6 +1,7 @@
 package com.assignmentevaluationportal.dto.response;
 
 import com.assignmentevaluationportal.constants.Gender;
+import com.assignmentevaluationportal.constants.UserStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,4 +25,6 @@ public class UserResponse {
 	private String avatarUrl;
 	
 	private Gender gender;
+	
+	private UserStatus status;
 }

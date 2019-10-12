@@ -82,7 +82,7 @@ public class AdminController {
 		List<StudentResponse> students = studentService.getStudentsByDivision(divisionId).stream()
 			.map(s -> new StudentResponse(s.getId(), s.getUser().getFirstName(), 
 					s.getUser().getLastName(), s.getUser().getEmail(), s.getUser().getPhoneNo(), 
-					s.getUser().getAvatarUrl(), s.getUser().getGender(), s.getCollegeFileNumber(), 
+					s.getUser().getAvatarUrl(), s.getUser().getGender(), s.getUser().getStatus(), s.getCollegeFileNumber(), 
 					s.getPermanentRegistrationNumber(), s.getAdmissionDate(), 
 					s.getActiveDivision() != null ? s.getActiveDivision().getId() : null, 
 					s.getActiveStudentDivision() != null ? s.getActiveStudentDivision().getRollNumber() : null))
